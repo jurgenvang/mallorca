@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Canyamel 10-19 augustus 2026</title>
+<meta name="description" content="Reisplanner voor Canyamel, Mallorca, 10 tot 19 augustus 2026, met weer, paklijst, budget en de totale zonsverduistering van 12 augustus.">
+<meta name="theme-color" content="#132436">
+<meta property="og:title" content="Canyamel 10-19 augustus 2026">
+<meta property="og:description" content="Dagplanning, weer ter plaatse, paklijst en budget.">
+<meta property="og:type" content="website">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23132436'/%3E%3Ccircle cx='46' cy='52' r='26' fill='%23F0C070'/%3E%3Ccircle cx='58' cy='44' r='26' fill='%23132436'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23132436'/%3E%3Ccircle cx='46' cy='52' r='26' fill='%23F0C070'/%3E%3Ccircle cx='58' cy='44' r='26' fill='%23132436'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1F3A5F;--deep:#132436;--teal:#0F7B8A;--sand:#F5EFE3;--mist:#E7ECEE;
+  --ochre:#C87A28;--rust:#B4531F;--line:#CBC3B4;--ink:#1B2733;--grey:#5C6672;
+  --white:#FFFDF9;--green:#2C7A5A;
+  --shadow:0 1px 2px rgba(19,36,54,.06),0 8px 24px rgba(19,36,54,.07);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  background:var(--mist);color:var(--ink);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px 90px}
+
+header{background:linear-gradient(165deg,var(--deep) 0%,var(--navy) 60%,#2A4F70 100%);
+  color:#EFF3F5;padding:26px 0 0;position:relative;overflow:hidden}
+header::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 78% 18%,rgba(200,122,40,.30),transparent 46%);pointer-events:none}
+.head-inner{max-width:860px;margin:0 auto;padding:0 18px 22px;position:relative;z-index:2}
+.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#9FB6C6;margin:0 0 6px;font-weight:500}
+h1{font-family:'Fraunces',Georgia,serif;font-weight:900;font-size:clamp(28px,7vw,44px);
+  line-height:1.02;margin:0;letter-spacing:-.02em}
+h1 span{display:block;font-weight:300;font-size:.46em;letter-spacing:.01em;color:#B8CCD9;margin-top:8px}
+.menu-btn{position:absolute;top:0;right:18px;z-index:5;width:38px;height:38px;border-radius:50%;
+  background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);color:#EFF3F5;
+  font-size:19px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.menu-btn:hover{background:rgba(255,255,255,.18)}
+.menu-btn:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+
+.tabs{display:flex;gap:2px;max-width:860px;margin:0 auto;padding:0 12px;position:relative;z-index:3}
+.tab{flex:1;font:inherit;font-size:13px;font-weight:600;padding:11px 6px;cursor:pointer;
+  background:rgba(255,255,255,.06);border:none;border-radius:10px 10px 0 0;color:#9FB6C6;letter-spacing:.01em}
+.tab[aria-selected="true"]{background:var(--mist);color:var(--navy)}
+.tab:focus-visible{outline:2px solid var(--ochre);outline-offset:-2px}
+
+.wx-strip{display:flex;gap:8px;overflow-x:auto;padding:14px 18px 6px;background:rgba(0,0,0,.18);
+  position:relative;z-index:2;scrollbar-width:thin}
+.wx-day{flex:0 0 auto;min-width:64px;text-align:center;padding:8px 9px;border-radius:10px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10);cursor:pointer;color:inherit;font:inherit}
+.wx-day .d{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#9FB6C6}
+.wx-day .ic{font-size:19px;line-height:1.3}
+.wx-day .t{font-size:13px;font-weight:600;color:#EFF3F5}
+.wx-day .t small{font-weight:400;color:#93A9B8;font-size:11px}
+.wx-note{padding:6px 18px 14px;font-size:12.5px;color:#A9C0CE;position:relative;z-index:2;background:rgba(0,0,0,.18)}
+.wx-note a{color:#EFD9BC}
+
+.eclipse-card{background:var(--deep);color:#E7EEF3;border-radius:14px;margin:22px 0 8px;padding:20px;
+  display:flex;gap:20px;align-items:center;box-shadow:var(--shadow)}
+.dial{flex:0 0 92px}
+.eclipse-card h2{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:19px;margin:0 0 4px}
+.eclipse-card p{margin:0;font-size:13.5px;color:#A9C0CE}
+.countdown{font-family:'Fraunces',Georgia,serif;font-size:25px;font-weight:900;color:var(--ochre);margin:8px 0 0}
+@media(max-width:520px){.eclipse-card{flex-direction:column;text-align:center;gap:12px}}
+
+.day{background:var(--white);border-radius:14px;margin:14px 0;box-shadow:var(--shadow);
+  overflow:hidden;border:1px solid rgba(31,58,95,.07)}
+.day-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:16px 18px 12px;border-bottom:1px solid var(--sand)}
+.day-date{font-family:'Fraunces',Georgia,serif;font-weight:900;font-size:15px;color:var(--teal)}
+.day-title{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:17.5px;margin:0;flex:1 1 140px}
+.chip{font-size:11.5px;padding:3px 9px;border-radius:99px;background:var(--sand);color:var(--grey);
+  white-space:nowrap;border:1px solid var(--line)}
+.chip.warm{background:#FBEEDC;border-color:#E8C89A;color:#8A5410}
+.chip.wet{background:#E2EDF3;border-color:#A9C6D8;color:#1C5470}
+.items{list-style:none;margin:0;padding:8px 18px 16px}
+.items li{display:flex;gap:12px;padding:7px 0;border-bottom:1px solid #F3EFE7;font-size:14px}
+.items li:last-child{border-bottom:none}
+.tm{flex:0 0 52px;font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums;font-size:13px}
+.tx{flex:1}
+.tx a{color:var(--teal)}
+.tx .sub{display:block;color:var(--grey);font-size:12.5px;margin-top:2px}
+.tip{background:#F1F6F2;border-left:3px solid var(--green);margin:0 18px 14px;padding:9px 12px;
+  font-size:13px;color:#25543F;border-radius:0 8px 8px 0}
+.tip a{color:var(--green)}
+
+.advice{margin:0;padding:13px 18px;background:#FBF1E2;border-top:1px solid #EBD5B4;font-size:13.5px;color:#7A4A12}
+.advice.storm{background:#E9F0F5;border-top-color:#BDD3E0;color:#1C4A66}
+.advice-actions{margin-top:9px;display:flex;gap:8px;flex-wrap:wrap}
+button.act,a.act{font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;padding:6px 13px;
+  border-radius:99px;border:1px solid currentColor;background:transparent;color:inherit;text-decoration:none;display:inline-block}
+button.act:hover,a.act:hover{background:rgba(0,0,0,.05)}
+button.act.primary{background:var(--rust);border-color:var(--rust);color:#fff}
+button.act.primary:hover{background:#9A4517}
+button.act:focus-visible,a.act:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.swapped{font-size:12px;color:var(--teal);padding:0 18px 12px;font-weight:500}
+
+.panel{background:var(--white);border-radius:14px;margin:16px 0;padding:18px;box-shadow:var(--shadow);
+  border:1px solid rgba(31,58,95,.07)}
+.panel h2{font-family:'Fraunces',Georgia,serif;font-size:19px;margin:0 0 3px;font-weight:600}
+.panel h3{font-family:'Fraunces',Georgia,serif;font-size:15px;margin:18px 0 8px;font-weight:600;color:var(--navy)}
+.panel .lead{margin:0 0 14px;font-size:13px;color:var(--grey)}
+.rows{width:100%;border-collapse:collapse;font-size:13.5px}
+.rows th{text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--grey);padding:0 0 6px;font-weight:600;border-bottom:1px solid var(--line)}
+.rows td{padding:8px 0;border-bottom:1px solid #F1ECE2;vertical-align:top}
+.rows td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rows tr:last-child td{border-bottom:none}
+.check{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid #F3EFE7;font-size:14px}
+.check:last-child{border-bottom:none}
+.check input{width:19px;height:19px;accent-color:var(--teal);flex:0 0 auto;margin-top:1px}
+.check label{cursor:pointer}
+.check .why{display:block;color:var(--grey);font-size:12.5px}
+.check.done label{text-decoration:line-through;color:var(--grey)}
+.total{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;padding-top:12px;
+  border-top:2px solid var(--navy);font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:17px}
+.total b{font-size:22px;font-weight:900;color:var(--navy);font-variant-numeric:tabular-nums}
+.progress{height:6px;background:var(--sand);border-radius:99px;overflow:hidden;margin:10px 0 4px}
+.progress i{display:block;height:100%;background:var(--teal);transition:width .3s}
+
+.trainbox{font-size:13.5px}
+.trainrow{display:flex;gap:10px;align-items:baseline;padding:8px 0;border-bottom:1px solid #F1ECE2}
+.trainrow:last-child{border-bottom:none}
+.trainrow .t1{font-weight:700;font-variant-numeric:tabular-nums;flex:0 0 46px;color:var(--navy)}
+.trainrow .lt{color:var(--rust);font-weight:600}
+.trainrow .ok{color:var(--green);font-weight:600}
+.trainrow .meta{color:var(--grey);font-size:12.5px}
+
+.sheet-bg{position:fixed;inset:0;background:rgba(19,36,54,.45);z-index:40;display:none;
+  align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto}
+.sheet-bg.open{display:flex}
+.sheet{background:var(--white);border-radius:16px;max-width:460px;width:100%;padding:22px;
+  box-shadow:0 20px 60px rgba(19,36,54,.3)}
+.sheet h2{font-family:'Fraunces',Georgia,serif;font-size:20px;margin:0 0 3px;font-weight:600}
+.sheet .lead{margin:0 0 18px;font-size:13px;color:var(--grey)}
+.field{margin-bottom:15px}
+.field label{display:block;font-size:12.5px;font-weight:600;margin-bottom:5px}
+.field .hint{font-size:12px;color:var(--grey);margin-top:4px}
+select,input[type=number],input[type=text],input[type=password]{font:inherit;font-size:14px;width:100%;
+  padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+.row{display:flex;gap:10px}
+.row .field{flex:1}
+.toggle{display:flex;align-items:center;gap:10px;margin-bottom:11px;font-size:13.5px}
+.toggle input{width:18px;height:18px;accent-color:var(--teal);flex:0 0 auto}
+.sheet-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap}
+.sheet-actions button{font:inherit;font-size:13.5px;font-weight:600;padding:9px 16px;border-radius:99px;cursor:pointer}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--grey)}
+.btn-solid{background:var(--navy);border:1px solid var(--navy);color:#fff}
+.btn-danger{background:transparent;border:1px solid var(--rust);color:var(--rust)}
+.status{font-size:12.5px;margin-top:8px;padding:8px 10px;border-radius:8px;display:none}
+.status.ok{display:block;background:#EAF3EE;color:#25543F}
+.status.bad{display:block;background:#FBEDE6;color:#8A3A12}
+hr.sep{border:none;border-top:1px solid var(--sand);margin:18px 0}
+footer{text-align:center;font-size:12px;color:var(--grey);padding:26px 18px 0}
+footer a{color:var(--teal)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <button class="menu-btn" id="menuBtn" aria-label="Instellingen openen">&#8942;</button>
+  <div class="head-inner">
+    <p class="eyebrow">10 - 19 augustus 2026</p>
+    <h1>Canyamel<span>Via del Foner 49 &middot; Mallorca</span></h1>
+  </div>
+  <div class="wx-strip" id="wxStrip"></div>
+  <div class="wx-note" id="wxNote">Weer laden&hellip;</div>
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="tab-plan" aria-selected="true" aria-controls="view-plan">Planning</button>
+    <button class="tab" role="tab" id="tab-pack" aria-selected="false" aria-controls="view-pack">Paklijst</button>
+    <button class="tab" role="tab" id="tab-geld" aria-selected="false" aria-controls="view-geld">Budget</button>
+    <button class="tab" role="tab" id="tab-info" aria-selected="false" aria-controls="view-info">Info</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section id="view-plan" role="tabpanel" aria-labelledby="tab-plan">
+    <div id="nuBox"></div>
+    <div class="eclipse-card">
+      <svg class="dial" viewBox="0 0 100 100" role="img" aria-label="Zonsverduistering">
+        <defs><radialGradient id="cor" cx="50%" cy="50%">
+          <stop offset="55%" stop-color="#C87A28" stop-opacity=".85"/>
+          <stop offset="100%" stop-color="#C87A28" stop-opacity="0"/>
+        </radialGradient></defs>
+        <circle cx="50" cy="50" r="44" fill="url(#cor)"/>
+        <circle cx="50" cy="50" r="26" fill="#F0C070"/>
+        <circle cx="59" cy="44" r="26" fill="#132436"/>
+      </svg>
+      <div>
+        <h2>Totale zonsverduistering</h2>
+        <p>Woensdag 12 augustus &middot; totaliteit om 20:31, ongeveer anderhalve minuut.</p>
+        <p class="countdown" id="countdown">&nbsp;</p>
+        <p id="eclipseWx" style="margin-top:6px"></p>
+      </div>
+    </div>
+    <div id="vluchtPanel"></div>
+    <div id="reisPanel"></div>
+    <div id="days"></div>
+  </section>
+
+  <section id="view-pack" role="tabpanel" aria-labelledby="tab-pack" hidden></section>
+  <section id="view-geld" role="tabpanel" aria-labelledby="tab-geld" hidden></section>
+  <section id="view-info" role="tabpanel" aria-labelledby="tab-info" hidden></section>
+
+  <footer>
+    Weer via Open-Meteo &middot; treininfo via iRail &middot; tijden zijn richtlijnen<br>
+    <a href="./Mallorca_Canyamel_10-19_augustus_2026.pdf" download>Volledige reisgids downloaden (PDF)</a><br>
+    <span style="opacity:.7">versie 2026.08.03-5</span>
+  </footer>
+</div>
+
+<div class="sheet-bg" id="sheetBg">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <h2 id="sheetTitle">Instellingen</h2>
+    <p class="lead">Bepaal waar het weer vandaan komt, wanneer de app voorstelt om dagen te ruilen, en of je live busgegevens wilt.
+       <br><b>Versie 2026.08.03-5</b> - vergelijk dit met de versie in je zip om te zien of het gepubliceerde bestand actueel is.</p>
+
+    <div class="field">
+      <label for="locSel">Weerlocatie</label>
+      <select id="locSel">
+        <option value="canyamel">Canyamel (verblijf)</option>
+        <option value="capblanc">Far de Cap Blanc (eclipsplek)</option>
+        <option value="salines">Cap de ses Salines (eclipsplek)</option>
+        <option value="arenal">Aqualand S'Arenal</option>
+        <option value="custom">Eigen co&ouml;rdinaten</option>
+      </select>
+      <div class="hint">De eclipsvoorspelling gebruikt altijd de kijkplek, ongeacht deze keuze.</div>
+    </div>
+    <div class="row" id="customCoords" style="display:none">
+      <div class="field"><label for="latIn">Breedtegraad</label><input type="number" id="latIn" step="0.0001"></div>
+      <div class="field"><label for="lonIn">Lengtegraad</label><input type="number" id="lonIn" step="0.0001"></div>
+    </div>
+    <div class="field">
+      <label for="unitSel">Temperatuur</label>
+      <select id="unitSel"><option value="celsius">Celsius</option><option value="fahrenheit">Fahrenheit</option></select>
+    </div>
+
+    <hr class="sep">
+    <div class="field">
+      <label for="rainIn">Waarschuwen bij regenkans vanaf</label>
+      <input type="number" id="rainIn" min="10" max="100" step="5">
+      <div class="hint">Percentage. Daarboven stelt de app een binnenactiviteit voor.</div>
+    </div>
+    <div class="field">
+      <label for="heatIn">Waarschuwen bij maximumtemperatuur vanaf</label>
+      <input type="number" id="heatIn" min="25" max="45" step="1">
+      <div class="hint">Graden. Daarboven adviseert de app om wandelingen te vervroegen.</div>
+    </div>
+    <div class="field">
+      <label for="windIn">Waarschuwen bij wind vanaf</label>
+      <input type="number" id="windIn" min="10" max="80" step="5">
+      <div class="hint">Kilometer per uur. Geldt voor boottochten en strandplannen.</div>
+    </div>
+    <div class="toggle"><input type="checkbox" id="autoAdv">
+      <label for="autoAdv" style="margin:0;font-weight:400">Voorstellen tonen om de planning aan te passen</label></div>
+    <div class="toggle"><input type="checkbox" id="showOpt">
+      <label for="showOpt" style="margin:0;font-weight:400">Optionele uitstappen tonen als alternatief</label></div>
+
+    <hr class="sep">
+    <div class="field">
+      <label for="dlKey">De Lijn API-sleutel</label>
+      <input type="password" id="dlKey" placeholder="alleen op dit toestel bewaard" autocomplete="off">
+      <div class="hint">Alleen nodig als je de doorstuurfunctie niet gebruikt. Zet je de sleutel als <b>DELIJN_KEY</b> bij Netlify, dan hoeft dit veld leeg te blijven en komt hij nooit in de browser.</div>
+    </div>
+    <div class="field">
+      <label>Halte zoeken bij het vertrekadres</label>
+      <div class="sheet-actions" style="justify-content:flex-start;margin-top:0">
+        <button class="btn-ghost" id="zoekHalte">Haltes in de buurt zoeken</button>
+      </div>
+      <div class="hint">Vult entiteit- en haltenummer zelf in. Je hoeft die nergens op te zoeken.</div>
+      <div id="halteLijst" style="margin-top:8px"></div>
+    </div>
+    <div class="row">
+      <div class="field"><label for="dlLat">Breedtegraad vertrekadres</label><input type="number" id="dlLat" step="0.00001" value="50.87300"></div>
+      <div class="field"><label for="dlLon">Lengtegraad vertrekadres</label><input type="number" id="dlLon" step="0.00001" value="4.76200"></div>
+    </div>
+    <div class="row">
+      <div class="field"><label for="dlEnt">Entiteitnummer</label><input type="number" id="dlEnt" placeholder="wordt ingevuld"></div>
+      <div class="field"><label for="dlHalte">Haltenummer</label><input type="number" id="dlHalte" placeholder="wordt ingevuld"></div>
+    </div>
+    <div class="sheet-actions" style="justify-content:flex-start;margin-top:0">
+      <button class="btn-ghost" id="testDL">Verbinding testen</button>
+    </div>
+    <div class="status" id="dlStatus"></div>
+
+    <hr class="sep">
+    <div class="field">
+      <label>Agenda</label>
+      <div class="sheet-actions" style="justify-content:flex-start;margin-top:0">
+        <button class="btn-ghost" id="icsBtn">Hele reis als agendabestand</button>
+      </div>
+      <div class="hint">Een .ics-bestand met alle items. Openen of importeren in Google Agenda, Outlook of
+        Apple Agenda. Heb je dagen geruild, dan volgt het bestand je aangepaste planning - maak het dan
+        opnieuw aan en verwijder eerst de oude items uit je agenda.</div>
+    </div>
+
+    <div class="sheet-actions">
+      <button class="btn-danger" id="resetPlan">Alles herstellen</button>
+      <button class="btn-ghost" id="closeSheet">Sluiten</button>
+      <button class="btn-solid" id="saveSheet">Opslaan</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============ instellingen ============ */
+const LOCS = {
+  canyamel:{lat:39.6567,lon:3.4407,naam:"Canyamel"},
+  capblanc:{lat:39.3636,lon:2.7878,naam:"Far de Cap Blanc"},
+  salines:{lat:39.2650,lon:3.0531,naam:"Cap de ses Salines"},
+  arenal:{lat:39.4957,lon:2.7595,naam:"Aqualand S'Arenal"}
+};
+const DEFAULTS = {loc:"canyamel",lat:39.6567,lon:3.4407,unit:"celsius",
+  rain:55,heat:33,wind:35,autoAdv:true,showOpt:true,dlKey:"",dlEnt:"",dlHalte:"",dlProxy:false,dlLat:50.873,dlLon:4.762};
+let cfg = Object.assign({},DEFAULTS);
+let plan=null, wx=null, wxError=null, marine=null, eclipseCloud=null;
+let wxSets=null, wxNamen={thuisbasis:"Canyamel",arenal:"Aqualand",kijkplek:"de kijkplek"};
+let packState={}, geldState={}, tab="plan";
+
+/* opslag: window.storage in de artifact-weergave, anders de browser zelf */
+const store = (window.storage && typeof window.storage.get==='function') ? window.storage : {
+  get: async k=>{const v=localStorage.getItem(k); if(v===null) throw new Error('leeg'); return {key:k,value:v};},
+  set: async (k,v)=>{localStorage.setItem(k,v); return {key:k,value:v};},
+  delete: async k=>{localStorage.removeItem(k); return {key:k,deleted:true};}
+};
+async function get(k){ try{const r=await store.get(k); return r&&r.value?JSON.parse(r.value):null;}catch(e){return null;} }
+async function set(k,v){ try{ await store.set(k,JSON.stringify(v)); }catch(e){} }
+
+/* ============ dagen ============ */
+function basePlan(){ return [
+ {date:"2026-08-09",dag:"Zo 9 aug",titel:"Voorbereiding",kind:["thuis"],vast:true,items:[
+   {t:"18:55",x:"<b>Online inchecken opent</b> voor de heenvlucht",s:"24 uur voor vertrek. Meteen doen geeft de beste kans op vier stoelen naast elkaar.",u:"https://www.vueling.com/nl"},
+   {t:"",x:"Bagage nameten",s:"40 x 30 x 20 cm is een rugzak, geen trolley. Een cabinekoffer van 55 x 40 x 20 past hier niet in en kost extra."},
+   {t:"",x:"Ruimbagage geboekt?",s:"Vier personen, tien dagen, alleen rugzakken inbegrepen. Vooraf boeken kost vanaf 10 euro, aan de balie een veelvoud.",u:"https://www.vueling.com/nl"}
+ ]},
+ {date:"2026-08-10",dag:"Ma 10 aug",titel:"Heenreis en aankomst",kind:["travel"],vast:true,items:[
+   {t:"15:35",x:"Halte voor de deur, richting Leuven",s:"Lijn 3. De halte voor de terugrit ligt 75 m verderop aan de overkant."},
+   {t:"15:45",x:"Bus lijn 3 naar Leuven station",s:"Ca. 20-25 min. Overdag op weekdagen twee bussen per uur.",u:"https://www.delijn.be/nl/routeplanner/"},
+   {t:"16:25",x:"Trein Leuven - Brussels Airport",s:"13 minuten, rechtstreeks, ongeveer twee per uur.",u:"https://www.belgiantrain.be/nl"},
+   {t:"16:40",x:"In de terminal",s:"Bagage afgeven, daarna security. Balies openen twee uur voor vertrek."},
+   {t:"18:55",x:"Vlucht VY 3651 naar Palma",s:"Aankomst 21:10. Daarna huurauto ophalen."},
+   {t:"22:15",x:"Rijden naar Canyamel",s:"Ca. 1 uur via de Ma-15. Neem water mee: 's nachts is alles dicht."}
+ ]},
+ {date:"2026-08-11",dag:"Di 11 aug",titel:"Acclimatiseren en markt van Arta",kind:["beach","outdoor"],items:[
+   {t:"09:30",x:"Boodschappen bij Eroski of Bip Bip",s:"Beide op vijf minuten lopen."},
+   {t:"10:30",x:"Markt van Arta",s:"Elke dinsdag, kunstnijverheid. Ca. 15 min rijden."},
+   {t:"15:00",x:"Strand van Canyamel",s:"Ondiep en rustig. Waterfiets of kajak ter plaatse, ca. 30 euro per uur."},
+   {t:"",x:"Alternatief: fietsen huren in Cala Ratjada",s:"Kustlus naar Cala Agulla, ca. 25 km, weinig klim. Cristobal +34 609 12 24 55 of Schulz +34 619 41 06 51."},
+   {t:"19:00",x:"Diner bij Restaurante Isabel",s:"18:00-22:30, woensdag gesloten. Tel. +34 971 84 15 22."}
+ ]},
+ {date:"2026-08-12",dag:"Wo 12 aug",titel:"Aqualand en de zonsverduistering",kind:["park","eclipse"],vast:true,wxbron:"arenal",items:[
+   {t:"08:30",x:"Vertrek richting Aqualand S'Arenal",s:"Ca. 1u15 via Ma-15 en Ma-19."},
+   {t:"10:00",x:"Aqualand opent",s:"Vier volwassentickets: 148 euro online. Vooraf kopen scheelt wachtrij.",u:"https://www.aqualand.es/elarenal/en/tickets"},
+   {t:"18:00",x:"Park sluit, doorrijden naar de kijkplek"},
+   {t:"18:45",x:"Far de Cap Blanc",s:"Of Cap de ses Salines, ca. 50 min. Vrij zicht naar het westen is essentieel."},
+   {t:"19:37",x:"Eerste contact",s:"Het licht verandert bijna een uur lang."},
+   {t:"20:31",x:"<b>Totaliteit</b>",s:"Ongeveer anderhalve minuut. Bril af tijdens de totaliteit, meteen weer op zodra de zon terugkomt."},
+   {t:"21:00",x:"Terugrijden",s:"Reken op extra verkeer. Thuis rond 22:15-22:45."}
+ ]},
+ {date:"2026-08-13",dag:"Do 13 aug",titel:"Herstel- en stranddag",kind:["beach","water"],items:[
+   {t:"",x:"Uitslapen na de late avond"},
+   {t:"11:00",x:"Strand van Canyamel",s:"Snorkelen in de rotsbaaitjes langs de kust."},
+   {t:"",x:"Alternatief: suptocht met gids",s:"Twee uur vanuit Cala Ratjada, inclusief een grot invaren. Vertrek 9:00, terug voor de middagzon. Een dag vooraf boeken: +34 680 71 99 58."},
+   {t:"13:00",x:"Lunch bij Arenal de Canyamel",s:"Dagzaak, sluit om 18:00."},
+   {t:"18:30",x:"Diner bij Restaurante Kutz",s:"18:00-22:00, dinsdag gesloten. Reserveren aanbevolen.",u:"https://restaurante.covermanager.com/restaurante-kutz/"},
+   {t:"21:00",x:"Sant Roc in Cala Ratjada",s:"Patroonsfeest, loopt tot 16 augustus. Muziek en activiteiten op de Placa dels Pins, gratis.",u:"https://visitcapdepera.com/en/sant-roc-festivals/"}
+ ]},
+ {date:"2026-08-14",dag:"Vr 14 aug",titel:"Coves d'Arta",kind:["indoor"],items:[
+   {t:"09:45",x:"Bij de grot zijn",s:"Opent 10:00, geen tijdsloten. Vier volwassentickets, ca. 64 euro. Binnen 20 graden: vestje mee.",u:"http://www.cuevasdearta.com/"},
+   {t:"12:00",x:"Markt van Son Servera of lunch in Capdepera"},
+   {t:"15:00",x:"Strand of zwembad"},
+   {t:"19:00",x:"Diner bij Cala Rotja",s:"Dagelijks 11:00-22:30, zeezicht. Tel. +34 971 84 15 13.",u:"https://www.calarotja.es/"}
+ ]},
+ {date:"2026-08-15",dag:"Za 15 aug",titel:"Cala Ratjada",kind:["beach","outdoor"],waarschuwing:"Spaanse feestdag: overal druk, veel winkels dicht.",items:[
+   {t:"09:00",x:"Zaterdagmarkt Cala Ratjada",s:"Carrer d'Elionor Servera, tot ca. 13:00. Vroeg zijn."},
+   {t:"12:30",x:"Cala Agulla",s:"Mooiste strand van de streek. Vroeg parkeren. Ligbed ca. 20 euro."},
+   {t:"19:30",x:"Diner bij Porxada de Sa Torre",s:"Reserveren op +34 971 84 13 10, zeker op een feestdag.",u:"http://www.torredecanyamel.com/es/gastronomia/porxada-de-sa-torre/"},
+   {t:"21:30",x:"Avond van Sant Roc",s:"Vooravond van het patroonsfeest in Cala Ratjada."}
+ ]},
+ {date:"2026-08-16",dag:"Zo 16 aug",titel:"Wandeling en het vuurwerk van Sant Roc",kind:["hike"],items:[
+   {t:"07:00",x:"Vertrek te voet vanuit Canyamel",s:"Loop de lus <b>tegen de klok in</b>: eerst de klim, daarna de kust. Andersom komt de steilste, onbeschaduwde klim op het heetst van de dag."},
+   {t:"08:30",x:"Top van de Puig de Son Jordi",s:"Ca. 300 m, met uitkijktoren. Panorama over Costa dels Pins, Cala Millor en de oostkust.",u:"https://www.komoot.de/tour/22240060"},
+   {t:"09:30",x:"Afdalen naar Costa des Pins",s:"Langs de golfbaan en het Cap des Pinar met uitzichtplatform."},
+   {t:"10:30",x:"Terug langs de kust",s:"Grotendeels asfalt door een villawijk: makkelijk lopen, minder mooi."},
+   {t:"11:00",x:"Terug in Canyamel",s:"10 tot 13 km, 3u20 tot 3u40, ca. 330 hoogtemeters."},
+   {t:"20:00",x:"Sant Roc, slotdag",s:"Plechtige mis en vuurwerk op muziek aan de haven van Cala Ratjada. Gratis, wel druk: kom vroeg voor parking.",u:"https://visitcapdepera.com/en/sant-roc-festivals/"}
+ ]},
+ {date:"2026-08-17",dag:"Ma 17 aug",titel:"Safari Mallorca en Fantasy Park",kind:["park","outdoor"],items:[
+   {t:"09:00",x:"Safari Mallorca in Sa Coma",s:"Opent 9:00. Safaritrein 30 min, daarna wandelgedeelte. Gratis parking.",u:"http://www.safarimallorca.es/"},
+   {t:"13:00",x:"Lunch en middag in Cala Millor"},
+   {t:"",x:"Alternatief voor de hele dag: Alcudia",s:"Wakepark aan de kabelbaan, eventueel met Hidropark ernaast. Ca. 1 uur rijden. Kitesurfen kan alleen daar: het oosten ligt in de luwte."},
+   {t:"17:00",x:"Fantasy Park",s:"Opent pas 16:30, tot middernacht. Voor 14 en 16 jaar vooral de karting.",u:"https://fantasyparkmallorca.com/"}
+ ]},
+ {date:"2026-08-18",dag:"Di 18 aug",titel:"Capdepera en vrije dag",kind:["outdoor"],items:[
+   {t:"10:00",x:"Castell de Capdepera",s:"Half uur volstaat. Parkeren op ca. 15 min lopen.",u:"http://www.capdeperacastell.com/"},
+   {t:"11:30",x:"Laatste inkopen bij Mercadona Capdepera"},
+   {t:"14:00",x:"Favoriete strand nog een keer"},
+   {t:"15:15",x:"<b>Online inchecken opent</b> voor de terugvlucht",s:"Boardingpasses meteen downloaden.",u:"https://www.vueling.com/nl"},
+   {t:"19:30",x:"Afscheidsdiner"}
+ ]},
+ {date:"2026-08-19",dag:"Wo 19 aug",titel:"Terugreis",kind:["travel"],vast:true,items:[
+   {t:"09:30",x:"Inpakken en appartement opleveren"},
+   {t:"11:15",x:"Vertrek richting Palma",s:"Ca. 1 uur. Onderweg tanken: de huurauto moet meestal vol terug."},
+   {t:"12:30",x:"Huurauto inleveren"},
+   {t:"15:15",x:"Vlucht VY 3650 naar Brussel",s:"Landing 17:45."},
+   {t:"19:00",x:"Trein naar Leuven, dan bus lijn 3",s:"Met twee ruimkoffers en vier personen is drie kwartier na de landing krap. Gaat het vlot, dan haal je de trein van 18:30. Halte 75 m verderop aan de overkant; na 20:00 nog een bus per uur."},
+   {t:"20:00",x:"Thuis",s:"Reken op een uur later als de bagageband tegenzit."}
+ ]}
+];}
+
+const KAARTEN={
+ "2026-08-11":["Markt van Arta","https://maps.google.com/?q=Arta,+Mallorca"],
+ "2026-08-12":["Kijkplek eclips","https://maps.google.com/?cid=16488442115445579507"],
+ "2026-08-13":["Strand Canyamel","https://maps.google.com/?q=Platja+de+Canyamel"],
+ "2026-08-14":["Coves d'Arta","https://maps.google.com/?cid=7295139734304329265"],
+ "2026-08-15":["Cala Agulla","https://maps.google.com/?cid=3291161934988000352"],
+ "2026-08-16":["Cala Ratjada haven","https://maps.google.com/?q=Port+de+Cala+Rajada"],
+ "2026-08-17":["Safari Mallorca","https://maps.google.com/?cid=1327446263082013607"],
+ "2026-08-18":["Castell de Capdepera","https://maps.google.com/?cid=697783948159023587"]
+};
+
+const BINNEN=[
+ {naam:"Coves del Drach",s:"Rondgang met concert op het Martel-meer. Tijdsloten, vooraf boeken.",u:"https://www.cuevasdeldrach.com/en/venta-entradas.php"},
+ {naam:"Palma Aquarium",s:"Haaienbassin. Ca. 1 uur rijden.",u:"https://www.palmaaquarium.com/"},
+ {naam:"Coves d'Arta",s:"Tien minuten van het appartement, binnen altijd 20 graden.",u:"http://www.cuevasdearta.com/"}
+];
+
+/* ============ paklijst ============ */
+const PACK = [
+ {groep:"Niet vergeten, anders is het te laat",items:[
+  {id:"eclips",t:"Vier eclipsbrillen, ISO 12312-2",w:"Rond 12 augustus overal uitverkocht op het eiland."},
+  {id:"bagage",t:"Ruimbagage geboekt bij Vueling",w:"Vooraf vanaf 10 euro, aan de balie een veelvoud."},
+  {id:"meten",t:"Handbagage nagemeten: 40 x 30 x 20 cm",w:"Moet onder de stoel passen. Een trolley haalt dit niet."},
+  {id:"ehic",t:"Europese ziekteverzekeringskaart per persoon",w:"Gratis aan te vragen bij het ziekenfonds, duurt enkele dagen."},
+  {id:"idkaart",t:"Vier identiteitskaarten, vervaldatum gecontroleerd",w:"Een verlopen kaart merk je pas aan de incheckbalie. Kijk nu na, vernieuwen duurt weken."},
+  {id:"rijbewijs",t:"Rijbewijs en creditcard van de hoofdbestuurder",w:"Verhuurders vragen bijna altijd een creditcard op naam."},
+  {id:"gpx",t:"GPS-track van de wandeling offline opgeslagen",w:"Niet bewegwijzerd, en op de hoogte valt het netwerk weg."},
+  {id:"pdf",t:"Deze reisgids offline op de telefoon",w:"PDF downloaden via de link onderaan."}
+ ]},
+ {groep:"Voor de eclips",items:[
+  {id:"statief",t:"Statief of iets om de telefoon op te leggen"},
+  {id:"stoel",t:"Klapstoeltjes of een deken",w:"Je staat er al vanaf half acht."},
+  {id:"lamp",t:"Zaklamp of hoofdlamp",w:"Het is stikdonker als je na de totaliteit terugloopt."},
+  {id:"snack",t:"Water en iets te eten voor onderweg"}
+ ]},
+ {groep:"Strand en water",items:[
+  {id:"snorkel",t:"Snorkelsets"},
+  {id:"waterschoen",t:"Waterschoenen",w:"De baaitjes rond Canyamel zijn rotsachtig."},
+  {id:"zonnecreme",t:"Zonnecreme factor 50 en aftersun"},
+  {id:"handdoek",t:"Stranddoeken"},
+  {id:"zwemshirt",t:"Zwemshirt of rashguard",w:"Op het water voel je de zon niet. Twee uur suppen levert anders een pijnlijke rug op."},
+  {id:"pet",t:"Petten of hoedjes"}
+ ]},
+ {groep:"Wandelen en uitstappen",items:[
+  {id:"schoenen",t:"Wandelschoenen met profiel",w:"Losse stenen op de Puig de Son Jordi."},
+  {id:"fles",t:"Herbruikbare drinkbussen, minstens 1,5 l per persoon"},
+  {id:"vestje",t:"Dun vestje",w:"In de grotten is het 20 graden."},
+  {id:"rugzakje",t:"Dagrugzak"}
+ ]},
+ {groep:"Algemeen",items:[
+  {id:"lader",t:"Laders en een powerbank"},
+  {id:"apotheek",t:"Kleine reisapotheek: pijnstiller, pleisters, iets tegen maagklachten"},
+  {id:"muggen",t:"Muggenspray",w:"De wetlands achter het strand van Canyamel."},
+  {id:"contant",t:"Wat contant geld",w:"Kleine strandzaken en marktkraampjes."},
+  {id:"kopie",t:"Kopie van identiteitskaarten en boekingen"}
+ ]}
+];
+
+/* ============ budget: 4 volwassenentarieven ============ */
+const GELD = {
+ vast:[
+  {id:"vlucht",t:"Vluchten Vueling, 4 personen heen en terug",n:"Al geboekt, PNR GG3EJV",bedrag:null},
+  {id:"ruim",t:"Ruimbagage, 2 koffers heen en terug",n:"Vanaf 10 euro per koffer per richting, vooraf geboekt",bedrag:60},
+  {id:"trein",t:"Trein Leuven - Brussels Airport, 4 personen heen en terug",n:"Ca. 12,50 per persoon per rit, luchthaventoeslag inbegrepen",bedrag:100},
+  {id:"bus",t:"Bus lijn 3, 4 personen heen en terug",n:"Ca. 2,50 per rit",bedrag:20},
+  {id:"huur",t:"Huurauto",n:"Geboekt",bedrag:212.07,aan:true},
+  {id:"brandstof",t:"Brandstof",n:"Schatting: ca. 700 km over tien dagen, inclusief de rit naar Aqualand",bedrag:80,aan:true},
+  {id:"verblijf",t:"Verblijf Canyamel, negen nachten",n:"Geboekt",bedrag:2448.22,aan:true}
+ ],
+ gepland:[
+  {id:"aqualand",t:"Aqualand S'Arenal",n:"4 x 37 euro online. Iedereen boven 10 jaar betaalt het volle tarief",bedrag:148,aan:true},
+  {id:"aquapark",t:"Parking Aqualand",n:"8 euro",bedrag:8,aan:true},
+  {id:"arta",t:"Coves d'Arta",n:"4 x ca. 16 euro. Kindertarief geldt tot 12 jaar",bedrag:64,aan:true},
+  {id:"safari",t:"Safari Mallorca",n:"4 x ca. 20 euro",bedrag:80,aan:true},
+  {id:"castell",t:"Castell de Capdepera",n:"4 x ca. 4 euro",bedrag:16,aan:true},
+  {id:"fantasy",t:"Fantasy Park, een avond",n:"Per attractie, karting is het duurst",bedrag:40,aan:true},
+  {id:"strand",t:"Ligbedden en parasol, twee dagen",n:"Ca. 20 euro per dag",bedrag:40,aan:true},
+  {id:"wandel",t:"Wandeling Puig de Son Jordi",n:"Gratis",bedrag:0,aan:true},
+  {id:"santroc",t:"Sant Roc in Cala Ratjada",n:"Gratis",bedrag:0,aan:true}
+ ],
+ eten:[
+  {id:"diner1",t:"Vier avonden gemiddeld restaurant",n:"Ca. 100 euro voor vier personen",bedrag:400,aan:true},
+  {id:"diner2",t:"Drie avonden hoger segment",n:"Ca. 160 euro voor vier personen",bedrag:480,aan:true},
+  {id:"lunch",t:"Lunches en ijsjes",n:"Ruwe schatting over tien dagen",bedrag:250,aan:true},
+  {id:"super",t:"Boodschappen",n:"Ontbijt en avonden thuis",bedrag:200,aan:true}
+ ],
+ optie:[
+  {id:"fietsdag",t:"Fietsen huren, een dag",n:"4 stadsfietsen in Cala Ratjada, ca. 15-20 euro per fiets",bedrag:70,aan:false},
+  {id:"fietsrace",t:"Racefiets, een dag",n:"Voor de Sant Llorenc-lus van 54 km",bedrag:40,aan:false},
+  {id:"sup",t:"Suptocht met gids",n:"Twee uur vanuit Cala Ratjada, 4 personen",bedrag:160,aan:false},
+  {id:"wake",t:"Wakepark Alcudia",n:"Kabelbaan, familie-uur, ca. 1 uur rijden",bedrag:120,aan:false},
+  {id:"jetski",t:"Jetskitocht met gids",n:"Cala Millor, 1 uur, 2 jetski's",bedrag:160,aan:false},
+  {id:"kite",t:"Kitesurfles",n:"Alleen in het noorden, ca. 1 uur rijden, per persoon",bedrag:120,aan:false},
+  {id:"drach",t:"Coves del Drach",n:"4 x ca. 15 euro, tijdsloten",bedrag:60,aan:false},
+  {id:"boot",t:"Boot- of snorkeltocht",n:"Vanaf ca. 40 euro per persoon",bedrag:160,aan:false},
+  {id:"golf",t:"Ronde golf, een persoon",n:"Greenfee en buggy",bedrag:130,aan:false},
+  {id:"aquarium",t:"Palma Aquarium",n:"Bij slecht weer",bedrag:100,aan:false},
+  {id:"hidro",t:"Hidropark Alcudia",n:"Alternatief waterpark",bedrag:90,aan:false}
+ ]
+};
+
+/* ============ info ============ */
+const INFO_NOOD = [
+ ["Alarmnummer","112","Werkt overal in Spanje, ook in het Nederlands of Engels via de centrale."],
+ ["Hospital General de Manacor","+34 971 847 000","Ctra. Manacor-Alcudia. Spoedopname: +34 971 847 060. Ca. 40 min rijden."],
+ ["Centro de Salud Capdepera","+34 971 563 006","C. Nou 12. Ook wachtdienst. Afspraak: 902 079 079."],
+ ["Centro de Salud Cala Ratjada","+34 971 565 854","Casa del Mar, C/ Juan Sebastian Elcano."],
+ ["Farmacia Aguilo Sancho","+34 971 563 313","C/ Llum 18, Capdepera."],
+ ["Farmacia Antich","+34 971 563 395","C/ Leonor Servera 51, Cala Ratjada."],
+ ["Farmacia Garcia Bartolome","+34 971 564 430","Avda. Cala Agulla 96, Cala Ratjada."],
+ ["Toeristische dienst Cala Ratjada","+34 971 818 854","Placa dels Pins."]
+];
+const INFO_AUTO = [
+ "Kinderen vanaf 135 cm mogen gewoon op een normale zitplaats. Met 14 en 16 jaar is er dus niets bijzonders nodig.",
+ "Alcohollimiet 0,5 promille, en 0,3 voor wie minder dan twee jaar rijbewijs heeft.",
+ "Snelheid: 120 op de autosnelweg, 90 op gewone wegen buiten de bebouwde kom, 50 tot 30 in dorpen.",
+ "Blauwe lijnen betekenen betalend parkeren met een ticket op het dashboard. Witte lijnen zijn gratis, gele betekenen verboden.",
+ "Handsfree bellen mag, een telefoon vasthouden niet. Boetes worden ter plaatse geind.",
+ "Bij schade: foto's maken, het Europees aanrijdingsformulier invullen en meteen de verhuurder bellen. Doe je dat niet, dan vervalt vaak de waarborgregeling.",
+ "Tanken doe je zelf; veel stations vragen 's avonds vooraf betalen aan de kassa."
+];
+const INFO_REIS = [
+ ["Adres verblijf","Via del Foner 49, 07589 Canyamel, Capdepera, Illes Balears"],
+ ["Vertrekadres","Lostraat 32, 3212 Pellenberg"],
+ ["Halte heenreis","Voor de deur, lijn 3 richting Leuven"],
+ ["Halte terugreis","75 m verderop aan de overkant"],
+ ["Boekingsreferentie","GG3EJV, Vueling, 4 passagiers, tarief Fly Light"],
+ ["Heenvlucht","VY 3651, ma 10 aug, 18:55 Brussel - 21:10 Palma"],
+ ["Terugvlucht","VY 3650, wo 19 aug, 15:15 Palma - 17:45 Brussel"],
+ ["Inchecken heen","zo 9 aug vanaf 18:55"],
+ ["Inchecken terug","di 18 aug vanaf 15:15"],
+ ["Handbagage","1 tas van 40 x 30 x 20 cm per persoon, onder de stoel"]
+];
+
+/* ============ agenda-items ============ */
+const EVENTS = [
+ ["Online inchecken Vueling VY 3651 (heen)","20260809T185500","20260809T192500","Fly Light: inchecken opent 24u voor vertrek. PNR GG3EJV.","vueling.com"],
+ ["Vertrek naar Brussels Airport","20260810T153500","20260810T164000","Bus lijn 3 vanaf de halte voor de deur, dan trein naar Brussels Airport.","Lostraat 32, 3212 Pellenberg"],
+ ["Vlucht VY 3651 Brussel - Palma","20260810T185500","20260810T211000","PNR GG3EJV, 4 passagiers. Aankomst 21:10, daarna huurauto.","Brussels Airport"],
+ ["Markt van Arta","20260811T103000","20260811T130000","Dinsdagmarkt met kunstnijverheid, tot ca. 13:00.","Arta, Mallorca"],
+ ["Aqualand S'Arenal","20260812T100000","20260812T180000","Tickets vooraf online. 4 volwassentarieven: 148 euro.","Aqualand El Arenal"],
+ ["TOTALE ZONSVERDUISTERING - totaliteit 20:31","20260812T193000","20260812T210000","Far de Cap Blanc of Cap de ses Salines. Eclipsbrillen ISO 12312-2.","Far de Cap Blanc, Llucmajor"],
+ ["Diner Restaurante Kutz","20260813T183000","20260813T203000","Reserveren via covermanager of +34 871 71 31 40.","Canyamel"],
+ ["Coves d'Arta","20260814T094500","20260814T110000","Opent 10:00, geen tijdsloten. Vestje meenemen.","Coves d'Arta, Canyamel"],
+ ["Markt Cala Ratjada","20260815T090000","20260815T130000","Tot ca. 13:00. Spaanse feestdag, extra druk.","Cala Ratjada"],
+ ["Diner Porxada de Sa Torre","20260815T193000","20260815T213000","Reserveren op +34 971 84 13 10.","Canyamel"],
+ ["Wandeling Puig de Son Jordi","20260816T073000","20260816T110000","10-11 km, 3u15, ca. 300 hoogtemeters. GPS-track offline meenemen.","Canyamel"],
+ ["Sant Roc: vuurwerk aan de haven","20260816T200000","20260816T230000","Slotdag van het patroonsfeest. Mis en piromusical. Gratis, kom vroeg voor parking.","Cala Ratjada haven"],
+ ["Safari Mallorca","20260817T090000","20260817T130000","Safaritrein 30 min plus wandelgedeelte. Gratis parking.","Sa Coma"],
+ ["Fantasy Park","20260817T170000","20260817T200000","Opent 16:30, tot middernacht. Karting.","Cala Millor"],
+ ["Castell de Capdepera","20260818T100000","20260818T110000","Ca. 4 euro per persoon. Parking op 15 min lopen.","Capdepera"],
+ ["Online inchecken Vueling VY 3650 (terug)","20260818T151500","20260818T154500","PNR GG3EJV. Boardingpasses downloaden.","vueling.com"],
+ ["Vertrek Canyamel - auto inleveren","20260819T111500","20260819T131500","Ca. 1 uur rijden, onderweg tanken.","Via del Foner 49, Canyamel"],
+ ["Vlucht VY 3650 Palma - Brussel","20260819T151500","20260819T174500","Landing 17:45. Daarna trein en bus lijn 3.","Aeroport de Palma"]
+];
+
+/* ============ weer ============ */
+async function fetchDaily(lat,lon){
+  const p=new URLSearchParams({latitude:lat,longitude:lon,
+    daily:"weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,cloud_cover_mean,uv_index_max,sunset",
+    timezone:"Europe/Madrid",temperature_unit:cfg.unit,start_date:"2026-08-09",end_date:"2026-08-19"});
+  const r=await fetch("https://api.open-meteo.com/v1/forecast?"+p);
+  if(!r.ok) throw new Error("status "+r.status);
+  const j=await r.json(); const out={};
+  j.daily.time.forEach((d,i)=>{ out[d]={code:j.daily.weather_code[i],max:j.daily.temperature_2m_max[i],
+    min:j.daily.temperature_2m_min[i],rain:j.daily.precipitation_sum[i],
+    rainP:j.daily.precipitation_probability_max[i],wind:j.daily.wind_speed_10m_max[i],
+    cloud:j.daily.cloud_cover_mean[i],uv:j.daily.uv_index_max[i],sunset:j.daily.sunset[i]}; });
+  return out;
+}
+
+/* Het weer wordt per plek opgehaald: waar je die dag echt bent.
+   Aqualand ligt 75 km verderop bij Palma, de eclipsplek nog verder zuidwaarts. */
+async function loadWeather(){
+  const eigen = LOCS[cfg.loc] || {lat:cfg.lat,lon:cfg.lon,naam:"eigen locatie"};
+  const plekken = {
+    thuisbasis: eigen,
+    arenal: LOCS.arenal,
+    kijkplek: cfg.loc==="salines" ? LOCS.salines : LOCS.capblanc
+  };
+  try{
+    const [a,b,c] = await Promise.all([
+      fetchDaily(plekken.thuisbasis.lat,plekken.thuisbasis.lon),
+      fetchDaily(plekken.arenal.lat,plekken.arenal.lon),
+      fetchDaily(plekken.kijkplek.lat,plekken.kijkplek.lon)
+    ]);
+    wxSets={thuisbasis:a,arenal:b,kijkplek:c};
+    wxNamen={thuisbasis:plekken.thuisbasis.naam,arenal:plekken.arenal.naam,kijkplek:plekken.kijkplek.naam};
+    wx=a; wxError=null;
+    await set('mallorca:wxcache',{when:Date.now(),sets:wxSets,namen:wxNamen});
+  }catch(e){
+    wxError=e.message||"verbinding mislukt";
+    const cch=await get('mallorca:wxcache');
+    if(cch&&cch.sets){ wxSets=cch.sets; wxNamen=cch.namen||wxNamen; wx=wxSets.thuisbasis;
+      wxError="offline, laatst opgehaalde verwachting"; }
+  }
+}
+
+/* welke plek hoort bij welke dag */
+function wxVoor(d){
+  const bron = d.wxbron || "thuisbasis";
+  const set0 = (wxSets&&wxSets[bron]) || wx;
+  return set0 ? set0[d.date] : null;
+}
+function wxNaamVoor(d){ return (wxNamen&&wxNamen[d.wxbron||"thuisbasis"])||""; }
+
+/* Weer van nu, ook ruim voor de reis al zinvol */
+let nu=null;
+async function loadNu(){
+  const loc = LOCS[cfg.loc] || {lat:cfg.lat,lon:cfg.lon,naam:"eigen locatie"};
+  const p=new URLSearchParams({latitude:loc.lat,longitude:loc.lon,
+    current:"temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m",
+    daily:"temperature_2m_max,temperature_2m_min,weather_code",
+    timezone:"Europe/Madrid",temperature_unit:cfg.unit,forecast_days:"3"});
+  try{
+    const r=await fetch("https://api.open-meteo.com/v1/forecast?"+p);
+    if(!r.ok) throw new Error();
+    const j=await r.json();
+    nu={temp:j.current.temperature_2m,code:j.current.weather_code,wind:j.current.wind_speed_10m,
+        vocht:j.current.relative_humidity_2m,plek:loc.naam,
+        max:j.daily.temperature_2m_max[0],min:j.daily.temperature_2m_min[0],
+        morgenMax:j.daily.temperature_2m_max[1],morgenCode:j.daily.weather_code[1]};
+  }catch(e){ nu=null; }
+}
+
+async function loadMarine(){
+  const p = new URLSearchParams({latitude:39.6567,longitude:3.4407,
+    daily:"sea_surface_temperature_max",timezone:"Europe/Madrid",
+    start_date:"2026-08-09",end_date:"2026-08-19"});
+  try{
+    const r = await fetch("https://marine-api.open-meteo.com/v1/marine?"+p);
+    if(!r.ok) throw new Error();
+    const j = await r.json();
+    marine={}; j.daily.time.forEach((d,i)=>{ marine[d]=j.daily.sea_surface_temperature_max[i]; });
+  }catch(e){ marine=null; }
+}
+async function loadEclipseSky(){
+  const loc = LOCS[cfg.loc==="salines"?"salines":"capblanc"];
+  const p = new URLSearchParams({latitude:loc.lat,longitude:loc.lon,hourly:"cloud_cover",
+    timezone:"Europe/Madrid",start_date:"2026-08-12",end_date:"2026-08-12"});
+  try{
+    const r = await fetch("https://api.open-meteo.com/v1/forecast?"+p);
+    if(!r.ok) throw new Error();
+    const j = await r.json();
+    const idx = j.hourly.time.map((t,i)=>({t,i})).filter(o=>{const h=+o.t.slice(11,13);return h>=19&&h<=21;}).map(o=>o.i);
+    const vals = idx.map(i=>j.hourly.cloud_cover[i]).filter(v=>v!=null);
+    if(vals.length) eclipseCloud={pct:Math.round(vals.reduce((a,b)=>a+b,0)/vals.length),plek:loc.naam};
+  }catch(e){ eclipseCloud=null; }
+}
+
+const ICONS={0:"\u2600\uFE0F",1:"\uD83C\uDF24\uFE0F",2:"\u26C5",3:"\u2601\uFE0F",45:"\uD83C\uDF2B\uFE0F",48:"\uD83C\uDF2B\uFE0F",
+ 51:"\uD83C\uDF26\uFE0F",53:"\uD83C\uDF26\uFE0F",55:"\uD83C\uDF26\uFE0F",61:"\uD83C\uDF27\uFE0F",63:"\uD83C\uDF27\uFE0F",
+ 65:"\uD83C\uDF27\uFE0F",80:"\uD83C\uDF26\uFE0F",81:"\uD83C\uDF27\uFE0F",82:"\u26C8\uFE0F",95:"\u26C8\uFE0F",96:"\u26C8\uFE0F",99:"\u26C8\uFE0F"};
+const deg=()=>cfg.unit==="fahrenheit"?"\u00B0F":"\u00B0";
+
+/* ============ trein ============ */
+/* Stations op hun officiele code, met de namen als terugval.
+   Zo faalt de opvraging niet stil als iRail een schrijfwijze niet herkent. */
+const STATIONS = {
+  leuven:{id:"BE.NMBS.008833001",namen:["Leuven","Louvain"]},
+  zaventem:{id:"BE.NMBS.008819406",namen:["Brussels-airport-zaventem","Brussels Airport-Zaventem","Brussel-Nationaal-Luchthaven"]}
+};
+async function trainConnections(vanKey,naarKey,dateISO,time){
+  const d=dateISO.slice(8,10)+dateISO.slice(5,7)+dateISO.slice(2,4);
+  const van=STATIONS[vanKey], naar=STATIONS[naarKey];
+  const paren=[[van.id,naar.id]];
+  van.namen.forEach(a=>naar.namen.forEach(b=>paren.push([a,b])));
+  for(const [a,b] of paren){
+    const p=new URLSearchParams({from:a,to:b,date:d,time:time,timesel:"departure",
+      format:"json",lang:"nl",results:"4"});
+    for(const basis of ["https://api.irail.be/v1/connections/?","https://api.irail.be/connections/?"]){
+      try{
+        const r=await fetch(basis+p);
+        if(!r.ok) continue;
+        const j=await r.json();
+        if(j&&j.connection&&j.connection.length) return j.connection;
+      }catch(e){}
+    }
+  }
+  return null;
+}
+function fmtTime(unix){ const d=new Date(+unix*1000);
+  return d.toLocaleTimeString('nl-BE',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Brussels'}); }
+
+async function renderReis(){
+  const host=document.getElementById('reisPanel');
+  const vandaag=new Date().toISOString().slice(0,10);
+  let datum=null,from=null,to=null,tijd=null,label=null;
+  if(vandaag<="2026-08-10"){ datum="2026-08-10"; from="leuven"; to="zaventem"; tijd="1600"; label="Leuven naar Brussels Airport, maandag 10 augustus"; }
+  else if(vandaag<="2026-08-19"){ datum="2026-08-19"; from="zaventem"; to="leuven"; tijd="1900"; label="Brussels Airport naar Leuven, woensdag 19 augustus, vanaf 19:00"; }
+  if(!datum){ host.innerHTML=""; return; }
+
+  host.innerHTML=`<div class="panel"><h2>Treinen</h2>
+    <p class="lead">${label}. Live gegevens van NMBS: vertraging, perron en afgelastingen.</p>
+    <div class="trainbox" id="trainbox">Verbindingen ophalen&hellip;</div>
+    <h3>Bus lijn 3</h3>
+    <p class="lead" style="margin-bottom:6px">Heen: halte voor de deur. Terug: 75 m verderop aan de overkant.</p>
+    <div class="trainbox" id="busbox">Doorkomsten ophalen&hellip;</div>
+    <div class="advice-actions" style="margin-top:12px">
+      <a class="act" href="https://www.belgiantrain.be/nl" target="_blank" rel="noopener">Tickets kopen</a>
+      <a class="act" href="https://www.delijn.be/nl/routeplanner/" target="_blank" rel="noopener">Busuren lijn 3</a>
+    </div></div>`;
+
+  busDoorkomsten().then(dk=>{
+    const b=document.getElementById('busbox'); if(!b) return;
+    if(!dk||!dk.length){ b.innerHTML=`Nog geen live busgegevens.
+      <a href="https://www.delijn.be/nl/routeplanner/" target="_blank" rel="noopener">Bekijk lijn 3 in de routeplanner</a>.`; return; }
+
+    /* De Lijn schrijft veldnamen niet overal gelijk. In plaats van een naam te
+       gokken, zoeken we het eerste veld dat eruitziet als wat we nodig hebben. */
+    const veld=(o,namen)=>{ for(const n of namen){ for(const k of Object.keys(o)){
+      if(k.toLowerCase()===n.toLowerCase()) return o[k]; } } return null; };
+    const tijdVeld=(o,soort)=>{
+      const kandidaat=Object.keys(o).find(k=>{
+        const kl=k.toLowerCase();
+        if(soort==='echt' && !(kl.includes('real')||kl.includes('predict'))) return false;
+        if(soort==='plan' && !(kl.includes('dienstregeling')||kl.includes('gepland'))) return false;
+        return /tijd|time|stip/.test(kl) && typeof o[k]==='string';
+      });
+      return kandidaat?o[kandidaat]:null;
+    };
+    const uur=t=>{ if(!t) return null;
+      const m=String(t).match(/(\d{2}):(\d{2})/); return m?m[1]+":"+m[2]:null; };
+
+    b.innerHTML=dk.slice(0,5).map(d=>{
+      const plan0=tijdVeld(d,'plan'), echt=tijdVeld(d,'echt');
+      const t=uur(echt)||uur(plan0)||"?";
+      const lijn=veld(d,['lijnnummer','lijnNummer','lijn'])||"3";
+      const best=veld(d,['bestemming','richting','omschrijving'])||"";
+      const laat = echt&&plan0&&uur(echt)!==uur(plan0);
+      return `<div class="trainrow"><span class="t1">${t}</span>
+        <span>lijn ${lijn}${best?" naar "+best:""}
+        ${laat?`<span class="lt">gepland ${uur(plan0)}</span>`:'<span class="ok">op tijd</span>'}</span></div>`;
+    }).join("");
+  });
+
+  const cs=await trainConnections(from,to,datum,tijd);
+  const box=document.getElementById('trainbox');
+  if(!cs||!cs.length){
+    box.innerHTML=`Geen verbindingen opgehaald. Op ${datum.slice(8,10)}/${datum.slice(5,7)} rijden er
+      ongeveer twee rechtstreekse treinen per uur, reistijd 13 minuten.
+      <a href="https://www.belgiantrain.be/nl" target="_blank" rel="noopener">Bekijk de dienstregeling</a>.`;
+    return;
+  }
+  box.innerHTML=cs.slice(0,4).map(c=>{
+    const dep=c.departure, arr=c.arrival;
+    const vert=+(dep.delay||0);
+    const geschrapt = (+dep.canceled)===1;
+    const status = geschrapt ? `<span class="lt">afgeschaft</span>`
+      : vert>0 ? `<span class="lt">+${Math.round(vert/60)} min</span>` : `<span class="ok">op tijd</span>`;
+    const perron = dep.platform ? `perron ${dep.platform}` : "";
+    return `<div class="trainrow"><span class="t1">${fmtTime(dep.time)}</span>
+      <span><b>${fmtTime(arr.time)}</b> aankomst &middot; ${status}
+      <span class="meta">${[perron,(dep.vehicleinfo&&dep.vehicleinfo.shortname)||""].filter(Boolean).join(" &middot; ")}</span></span></div>`;
+  }).join("");
+}
+
+/* Netlify en Cloudflare gebruiken een ander adres voor dezelfde functie.
+   We proberen beide, en onthouden welke werkte. */
+let functiePad=null;
+async function roepFunctie(naam, params){
+  const paden = functiePad ? [functiePad]
+    : ["/.netlify/functions/", "/api/"];
+  for(const pad of paden){
+    try{
+      const r=await fetch(pad+naam+(params?"?"+params:""));
+      if(r.status===404) continue;
+      functiePad=pad;
+      return r;
+    }catch(e){}
+  }
+  return null;
+}
+
+/* ============ vlucht ============ */
+const VLUCHTEN = {
+  heen:{nr:"VY3651",datum:"2026-08-10",van:"Brussel Zaventem",naar:"Palma de Mallorca",
+        gepland:"18:55",aankomst:"21:10",tz:"Europe/Brussels",
+        bord:"https://www.brusselsairport.be/nl/vluchten/vertrek"},
+  terug:{nr:"VY3650",datum:"2026-08-19",van:"Palma de Mallorca",naar:"Brussel Zaventem",
+         gepland:"15:15",aankomst:"17:45",tz:"Europe/Madrid",
+         bord:"https://www.aena.es/en/palma-de-mallorca/flight-information/flight-information.html"}
+};
+function welkeVlucht(){
+  const vandaag=new Date().toISOString().slice(0,10);
+  return vandaag<="2026-08-10" ? VLUCHTEN.heen : vandaag<="2026-08-19" ? VLUCHTEN.terug : null;
+}
+/* Aviationstack geeft maar 100 opvragingen per maand. Daarom halen we de
+   status alleen op als ze iets kan opleveren, en bewaren we het antwoord.
+
+   - buiten het venster rond de vlucht: geen enkele opvraging
+   - binnen dat venster: hoogstens een keer per kwartier, en in de laatste
+     uren voor vertrek een keer per vijf minuten
+   - een harde grens per maand, met een knop om zelf te verversen           */
+const VLUCHTBUDGET = 60;          /* laat marge op de 100 van het gratis tarief */
+let vluchtTeller = null;
+
+function maandsleutel(){ const d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,'0'); }
+
+async function leesTeller(){
+  if(vluchtTeller) return vluchtTeller;
+  const t=await get('mallorca:vluchtteller');
+  vluchtTeller = (t && t.maand===maandsleutel()) ? t : {maand:maandsleutel(), n:0};
+  return vluchtTeller;
+}
+async function verhoogTeller(){
+  const t=await leesTeller(); t.n++; vluchtTeller=t; await set('mallorca:vluchtteller',t); return t;
+}
+
+/* Hoe ver staan we van de vlucht? Bepaalt of en hoe vaak we vragen. */
+function vluchtVenster(v){
+  const vertrek=new Date(v.datum+"T"+v.gepland+":00"+(v.tz==="Europe/Madrid"?"+02:00":"+02:00"));
+  const uren=(vertrek-new Date())/3600000;
+  if(uren>36) return {vragen:false, reden:"ver", uren};
+  if(uren<-6)  return {vragen:false, reden:"voorbij", uren};
+  if(uren<=4)  return {vragen:true, versheid:5*60*1000, uren};     /* laatste uren: vaker */
+  if(uren<=12) return {vragen:true, versheid:15*60*1000, uren};
+  return {vragen:true, versheid:60*60*1000, uren};                  /* dag ervoor: elk uur */
+}
+
+async function vluchtStatus(v, handmatig=false){
+  const bewaard=await get('mallorca:vlucht:'+v.nr);
+  const venster=vluchtVenster(v);
+
+  if(!handmatig && !venster.vragen){
+    return bewaard && bewaard.data
+      ? {data:bewaard.data, van:bewaard.tijd, gespaard:true}
+      : {overgeslagen:venster.reden};
+  }
+  if(!handmatig && bewaard && bewaard.tijd && (Date.now()-bewaard.tijd)<venster.versheid){
+    return {data:bewaard.data, van:bewaard.tijd, gespaard:true};
+  }
+
+  const t=await leesTeller();
+  if(t.n>=VLUCHTBUDGET && !handmatig){
+    return bewaard && bewaard.data
+      ? {data:bewaard.data, van:bewaard.tijd, gespaard:true, opgebruikt:true}
+      : {fout:"maandbudget bereikt", opgebruikt:true};
+  }
+
+  try{
+    const r=await roepFunctie("vlucht",`nr=${v.nr}&datum=${v.datum}`);
+    if(!r) return bewaard&&bewaard.data ? {data:bewaard.data, van:bewaard.tijd, gespaard:true}
+                                        : {fout:"functie niet gevonden"};
+    await verhoogTeller();
+    const j=await r.json().catch(()=>null);
+    if(r.ok && j && !j.fout){
+      await set('mallorca:vlucht:'+v.nr, {tijd:Date.now(), data:j});
+      return {data:j, van:Date.now()};
+    }
+    if(bewaard && bewaard.data) return {data:bewaard.data, van:bewaard.tijd, gespaard:true};
+    return {fout:(j&&j.uitleg)||(j&&j.fout)||("fout "+r.status), code:r.status};
+  }catch(e){
+    return bewaard&&bewaard.data ? {data:bewaard.data, van:bewaard.tijd, gespaard:true}
+                                 : {fout:"functie niet bereikbaar"};
+  }
+}
+
+function klok(iso,tz){
+  if(!iso) return null;
+  const d=new Date(iso);
+  if(isNaN(d)) return String(iso).slice(11,16)||null;
+  return d.toLocaleTimeString('nl-BE',{hour:'2-digit',minute:'2-digit',timeZone:tz});
+}
+const STATUSTEKST={scheduled:"volgens plan",active:"in de lucht",landed:"geland",
+  cancelled:"geannuleerd",incident:"incident",diverted:"omgeleid",delayed:"vertraagd"};
+
+async function renderVlucht(handmatig=false){
+  const host=document.getElementById('vluchtPanel');
+  if(!host) return;
+  const v=welkeVlucht();
+  if(!v){ host.innerHTML=""; return; }
+  const venster=vluchtVenster(v);
+  const t=await leesTeller();
+
+  host.innerHTML=`<div class="panel"><h2>Vlucht ${v.nr}</h2>
+    <p class="lead">${v.van} naar ${v.naar}, ${v.gepland} volgens plan, aankomst ${v.aankomst}.</p>
+    <div class="trainbox" id="vluchtbox">Status ophalen&hellip;</div>
+    <div class="advice-actions" style="margin-top:12px">
+      <button class="act" id="vluchtVerversen">Nu verversen</button>
+      <a class="act" href="${v.bord}" target="_blank" rel="noopener">Vertrekbord luchthaven</a>
+      <a class="act" href="https://www.vueling.com/nl" target="_blank" rel="noopener">Inchecken bij Vueling</a>
+    </div>
+    <p class="lead" id="vluchtBudget" style="margin:10px 0 0;font-size:12px"></p></div>`;
+
+  document.getElementById('vluchtVerversen').onclick=()=>renderVlucht(true);
+
+  const box=document.getElementById('vluchtbox');
+  const res=await vluchtStatus(v, handmatig);
+  const bud=document.getElementById('vluchtBudget');
+  const teller=await leesTeller();
+  const rest=Math.max(0,VLUCHTBUDGET-teller.n);
+  bud.textContent = `${teller.n} van ${VLUCHTBUDGET} opvragingen deze maand gebruikt` +
+    (res.van?` - laatst bijgewerkt om ${new Date(res.van).toLocaleTimeString('nl-BE',{hour:'2-digit',minute:'2-digit'})}`:"") +
+    (res.gespaard?" (bewaarde versie)":"");
+
+  if(res.overgeslagen==="ver"){
+    box.innerHTML=`Live gegevens verschijnen vanaf ongeveer anderhalve dag voor vertrek.
+      Tot dan geldt het schema hierboven, en wordt er niets opgevraagd.`;
+    return;
+  }
+  if(res.overgeslagen==="voorbij"){ box.innerHTML=`Deze vlucht is geweest.`; return; }
+  if(res.fout){
+    box.innerHTML = res.opgebruikt
+      ? `Het maandbudget van ${VLUCHTBUDGET} opvragingen is bereikt. Gebruik het vertrekbord van de luchthaven.`
+      : `Geen live gegevens (${res.fout}). Gebruik het vertrekbord van de luchthaven.`;
+    return;
+  }
+  const d=res.data, dep=d.vertrek||{}, arr=d.aankomst||{};
+  const st=STATUSTEKST[d.status]||d.status||"onbekend";
+  const vert=+(dep.vertraging||0);
+  const kleur = d.status==="cancelled" ? "lt" : vert>15 ? "lt" : "ok";
+  const tekst = d.status==="cancelled" ? "geannuleerd" : vert>0 ? `+${vert} min` : st;
+  const regels=[];
+  regels.push(`<div class="trainrow"><span class="t1">${klok(dep.verwacht,v.tz)||v.gepland}</span>
+    <span><b>vertrek</b> ${dep.iata||""} &middot; <span class="${kleur}">${tekst}</span>
+    <span class="meta">${[dep.terminal?"terminal "+dep.terminal:"",dep.gate?"gate "+dep.gate:""].filter(Boolean).join(" &middot; ")||"gate nog niet bekend"}</span></span></div>`);
+  regels.push(`<div class="trainrow"><span class="t1">${klok(arr.verwacht,v.nr==="VY3651"?"Europe/Madrid":"Europe/Brussels")||v.aankomst}</span>
+    <span><b>aankomst</b> ${arr.iata||""}
+    <span class="meta">${[arr.terminal?"terminal "+arr.terminal:"",arr.band?"bagageband "+arr.band:""].filter(Boolean).join(" &middot; ")||""}</span></span></div>`);
+  box.innerHTML=regels.join("");
+}
+
+/* ============ De Lijn ============ */
+async function testDeLijn(){
+  const s=document.getElementById('dlStatus');
+  const key=document.getElementById('dlKey').value.trim();
+  const ent=document.getElementById('dlEnt').value.trim();
+  const halte=document.getElementById('dlHalte').value.trim();
+  s.className='status'; s.style.display='block'; s.textContent='Testen\u2026';
+  if(!ent||!halte){ s.className='status bad';
+    s.textContent='Vul entiteit- en haltenummer in. Die vind je op delijn.be in het adres van de haltepagina.'; return; }
+
+  /* 1. via de doorstuurfunctie op Netlify */
+  try{
+    const r=await roepFunctie("delijn",`ent=${ent}&halte=${halte}`) || {status:404,ok:false,json:async()=>({})};
+    if(r.ok){ cfg.dlProxy=true; await set('mallorca:cfg',cfg);
+      s.className='status ok';
+      s.textContent='Werkt via de doorstuurfunctie. Je sleutel staat op Netlify en hoeft hier niet ingevuld.';
+      renderReis(); return; }
+    const j=await r.json().catch(()=>({}));
+    if(r.status===500&&j.fout==='geen sleutel'){ s.className='status bad';
+      s.textContent='De functie draait, maar de sleutel ontbreekt. Zet DELIJN_KEY bij Netlify onder Site configuration, Environment variables, en publiceer opnieuw.'; return; }
+    if(r.status===401){ s.className='status bad';
+      s.textContent='De sleutel wordt geweigerd door De Lijn. Controleer of je hem uit het juiste product hebt gekopieerd.'; return; }
+    if(r.status!==404){ s.className='status bad';
+      s.textContent=(j.fout||'Fout '+r.status)+'. '+(j.uitleg||''); return; }
+  }catch(e){ /* functie bestaat nog niet, val terug */ }
+
+  /* 2. rechtstreeks vanuit de browser, met de sleutel uit dit veld */
+  if(!key){ s.className='status bad';
+    s.textContent='De doorstuurfunctie is nog niet gepubliceerd. Vul hier je sleutel in om rechtstreeks te testen, of zet de functie online.'; return; }
+  try{
+    const r=await fetch(`https://api.delijn.be/DLKernOpenData/api/v1/haltes/${ent}/${halte}/real-time`,
+      {headers:{'Ocp-Apim-Subscription-Key':key}});
+    if(r.ok){ cfg.dlProxy=false; await set('mallorca:cfg',cfg);
+      s.className='status ok'; s.textContent='Werkt rechtstreeks. De doorkomsten verschijnen bij de reisdagen.';
+      renderReis(); return; }
+    s.className='status bad'; s.textContent='De Lijn antwoordde met status '+r.status+'.';
+  }catch(e){
+    s.className='status bad';
+    s.textContent='De browser mag De Lijn niet rechtstreeks bevragen. Publiceer de doorstuurfunctie op Netlify en zet je sleutel daar als DELIJN_KEY; dan werkt het wel.';
+  }
+}
+
+/* haltes in de buurt zoeken, zodat je geen nummers hoeft op te zoeken */
+async function zoekHaltes(){
+  const box=document.getElementById('halteLijst');
+  const st=document.getElementById('dlStatus');
+  const lat=parseFloat(document.getElementById('dlLat').value);
+  const lon=parseFloat(document.getElementById('dlLon').value);
+  const key=document.getElementById('dlKey').value.trim();
+  st.className='status'; st.style.display='none';
+  if(!isFinite(lat)||!isFinite(lon)){ box.innerHTML='<span style="font-size:12.5px;color:var(--rust)">Vul geldige co\u00f6rdinaten in.</span>'; return; }
+  box.innerHTML='<span style="font-size:12.5px;color:var(--grey)">Zoeken\u2026</span>';
+
+  const lees=async r=>{ if(!r.ok) return null; const j=await r.json();
+    const l=j.haltes||j.halten||(Array.isArray(j)?j:null); return Array.isArray(l)?l:null; };
+  let lijst=null;
+  try{ const r=await roepFunctie("delijn",`mode=indebuurt&lat=${lat}&lon=${lon}&straal=800`); if(r) lijst=await lees(r); }catch(e){}
+  if(!lijst&&key){ try{
+    lijst=await lees(await fetch(`https://api.delijn.be/DLKernOpenData/api/v1/haltes/indebuurt/${lat},${lon}?maxAantalHaltes=15&straal=800`,
+      {headers:{'Ocp-Apim-Subscription-Key':key}}));
+  }catch(e){} }
+
+  if(!lijst||!lijst.length){
+    box.innerHTML='<span style="font-size:12.5px;color:var(--rust)">Geen haltes opgehaald. '+
+      'Publiceer eerst de doorstuurfunctie op Netlify met DELIJN_KEY, of vul hierboven je sleutel in.</span>';
+    return;
+  }
+  box.innerHTML=lijst.slice(0,10).map(h=>{
+    const naam=h.omschrijving||h.omschrijvingLang||h.naam||'halte';
+    const gem=h.gemeentenaam||h.gemeente||'';
+    return `<button class="act" style="display:block;width:100%;text-align:left;margin-bottom:5px"
+      data-ent="${h.entiteitnummer||h.entiteitNummer||''}" data-halte="${h.haltenummer||h.halteNummer||''}">
+      ${naam}${gem?' &middot; '+gem:''}
+      <span style="color:var(--grey);font-weight:400"> (entiteit ${h.entiteitnummer||h.entiteitNummer||'?'}, halte ${h.haltenummer||h.halteNummer||'?'})</span>
+      </button>`;
+  }).join("");
+  box.querySelectorAll('[data-ent]').forEach(b=>b.onclick=()=>{
+    document.getElementById('dlEnt').value=b.dataset.ent;
+    document.getElementById('dlHalte').value=b.dataset.halte;
+    box.innerHTML='<span style="font-size:12.5px;color:var(--green)">Ingevuld. Druk op <b>Verbinding testen</b> en daarna op Opslaan.</span>';
+  });
+}
+
+/* doorkomsten ophalen, via de functie of rechtstreeks */
+async function busDoorkomsten(){
+  const ent=cfg.dlEnt, halte=cfg.dlHalte;
+  if(!ent||!halte) return null;
+  const lees=async r=>{ if(!r.ok) return null; const j=await r.json();
+    const lijst = (j.halteDoorkomsten&&j.halteDoorkomsten[0]&&j.halteDoorkomsten[0].doorkomsten)||j.doorkomsten;
+    return Array.isArray(lijst)?lijst:null; };
+  try{ const r=await roepFunctie("delijn",`ent=${ent}&halte=${halte}`); if(r){ const v=await lees(r); if(v) return v; } }catch(e){}
+  if(cfg.dlKey){ try{
+    const r=await fetch(`https://api.delijn.be/DLKernOpenData/api/v1/haltes/${ent}/${halte}/real-time`,
+      {headers:{'Ocp-Apim-Subscription-Key':cfg.dlKey}});
+    const v=await lees(r); if(v) return v;
+  }catch(e){} }
+  return null;
+}
+
+/* ============ agenda ============ */
+function icsEscape(t){ return String(t).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n'); }
+/* Als dagen geruild zijn, klopt de vaste lijst niet meer.
+   Dan bouwen we de items op uit de planning zoals ze nu is. */
+function eventsUitPlan(){
+  const uit=[];
+  plan.forEach(d=>{
+    const dag=d.date.replace(/-/g,'');
+    d.items.forEach((it,n)=>{
+      if(!it.t) return;
+      const u=it.t.replace(':','')+"00";
+      const eindU=String(Math.min(23,parseInt(it.t.slice(0,2),10)+1)).padStart(2,'0')+it.t.slice(3,5)+"00";
+      const titel=String(it.x).replace(/<[^>]+>/g,'');
+      uit.push([titel, dag+"T"+u, dag+"T"+eindU, (it.s||"").replace(/<[^>]+>/g,''), d.titel]);
+    });
+  });
+  return uit;
+}
+function buildICS(){
+  const geruild = plan.some(d=>d.geruild);
+  const bron = geruild ? eventsUitPlan() : EVENTS;
+  const L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Canyamel 2026//NL","CALSCALE:GREGORIAN","METHOD:PUBLISH",
+    "X-WR-CALNAME:Mallorca 2026","BEGIN:VTIMEZONE","TZID:Europe/Brussels","BEGIN:DAYLIGHT",
+    "TZOFFSETFROM:+0100","TZOFFSETTO:+0200","TZNAME:CEST","DTSTART:19700329T020000",
+    "RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU","END:DAYLIGHT","BEGIN:STANDARD","TZOFFSETFROM:+0200",
+    "TZOFFSETTO:+0100","TZNAME:CET","DTSTART:19701025T030000","RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU",
+    "END:STANDARD","END:VTIMEZONE"];
+  const stamp=new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+"Z";
+  bron.forEach((e,i)=>{
+    L.push("BEGIN:VEVENT","UID:canyamel-"+i+"@reis2026","DTSTAMP:"+stamp,
+      "DTSTART;TZID=Europe/Brussels:"+e[1],"DTEND;TZID=Europe/Brussels:"+e[2],
+      "SUMMARY:"+icsEscape(e[0]),"DESCRIPTION:"+icsEscape(e[3]),"LOCATION:"+icsEscape(e[4]),"END:VEVENT");
+  });
+  L.push("END:VCALENDAR");
+  return L.join("\r\n");
+}
+function downloadICS(){
+  const blob=new Blob([buildICS()],{type:'text/calendar;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download='Mallorca-2026.ics';
+  document.body.appendChild(a); a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},500);
+}
+
+/* ============ advies ============ */
+/* 80-82 zijn buien, 95-99 onweer. Een middagbui van twintig minuten is iets
+   heel anders dan een dag miezer, en vraagt geen andere planning. */
+const BUICODES=[80,81,82,95,96,99];
+function adviesVoor(d){
+  const w=wxVoor(d); if(!cfg.autoAdv||!w) return null;
+  const k=d.kind||[];
+  const bui = BUICODES.includes(w.code);
+  const nat=(w.rainP!=null&&w.rainP>=cfg.rain)||(w.rain!=null&&w.rain>=3);
+  if(bui && nat && w.rain!=null && w.rain<10 && !k.includes("eclipse")){
+    return {type:"warm",tekst:`<b>Buien of onweer verwacht, ${w.rain} mm.</b> Op Mallorca is dat in augustus
+      meestal een korte namiddagbui, geen dag regen. Houd je planning, neem een regenjas mee en zoek even
+      een terras op als het losbarst. Wel oppassen op de hoogte en op het water.`,swap:null};
+  }
+  const heet=w.max!=null&&w.max>=cfg.heat;
+  const winderig=w.wind!=null&&w.wind>=cfg.wind;
+  if(k.includes("eclipse")) return nat?{type:"storm",tekst:(bui?"<b>Onweer of buien voorspeld op 12 augustus.</b> Voor Aqualand hoeft dat geen ramp te zijn, maar voor de eclips wel: wolkenvelden bouwen zich juist in de namiddag op. ":"<b>Regen voorspeld op 12 augustus.</b> Aqualand wordt dan weinig plezant. ")+"Overweeg het waterpark te ruilen met een andere dag; de kijkplek voor de eclips blijft hoe dan ook de zuidkust.",swap:"binnen"}:null;
+  if(k.includes("hike")&&heet) return {type:"warm",tekst:`<b>Tot ${Math.round(w.max)}${deg()} verwacht.</b> Vertrek een uur vroeger, om 06:30, of ruil de wandeling met een koelere dag. Twee liter water per persoon.`,swap:"koelste"};
+  if((k.includes("beach")||k.includes("water"))&&nat) return {type:"storm",tekst:`<b>Regenkans ${w.rainP}% en ${w.rain} mm neerslag.</b> Een stranddag heeft weinig zin. Ruil met een binnenactiviteit.`,swap:"binnen"};
+  if(k.includes("park")&&nat) return {type:"storm",tekst:`<b>Regenkans ${w.rainP}%.</b> Buiten rondlopen wordt nat. Ruil met een droge dag of kies een binnenalternatief.`,swap:"binnen"};
+  if((k.includes("beach")||k.includes("water"))&&winderig) return {type:"storm",tekst:`<b>Wind tot ${Math.round(w.wind)} km/u.</b> Boottochten worden geschrapt en op het strand waait het zand. Kies een baai in de luwte.`,swap:"binnen"};
+  if(k.includes("outdoor")&&nat) return {type:"storm",tekst:`<b>Regenkans ${w.rainP}%.</b> Neem een regenjas mee of schuif de buitenplannen naar een drogere dag.`,swap:"binnen"};
+  if(heet&&(k.includes("outdoor")||k.includes("park"))) return {type:"warm",tekst:`<b>Tot ${Math.round(w.max)}${deg()}.</b> Doe de buitenstukken voor 11:00 en houd 13:00-16:00 vrij voor zwembad of siesta.`,swap:null};
+  return null;
+}
+function koelsteDag(h){ if(!wx) return null;
+  const k=plan.filter(d=>!d.vast&&d.date!==h&&wx[d.date]&&wx[d.date].max!=null);
+  return k.length?k.sort((a,b)=>wx[a.date].max-wx[b.date].max)[0]:null; }
+function droogsteDag(h){ if(!wx) return null;
+  const k=plan.filter(d=>!d.vast&&d.date!==h&&wx[d.date]);
+  return k.length?k.sort((a,b)=>(wx[a.date].rainP||0)-(wx[b.date].rainP||0))[0]:null; }
+function ruil(a,b){
+  const ia=plan.findIndex(d=>d.date===a), ib=plan.findIndex(d=>d.date===b);
+  if(ia<0||ib<0) return;
+  const A=plan[ia],B=plan[ib], keep={titel:A.titel,items:A.items,kind:A.kind};
+  A.titel=B.titel;A.items=B.items;A.kind=B.kind;A.geruild=true;
+  B.titel=keep.titel;B.items=keep.items;B.kind=keep.kind;B.geruild=true;
+  set('mallorca:plan',plan); renderPlan();
+}
+
+/* ============ render: planning ============ */
+function renderStrip(){
+  const el=document.getElementById('wxStrip'), note=document.getElementById('wxNote');
+  if(!wx){ el.innerHTML="";
+    note.innerHTML='Weer nog niet opgehaald'+(wxError?' ('+wxError+')':'')+
+      '. Bekijk de verwachting op <a href="https://www.aemet.es/en/eltiempo/prediccion/municipios/capdepera-id07014" target="_blank" rel="noopener">AEMET</a>.';
+    return; }
+  const naam = LOCS[cfg.loc]?LOCS[cfg.loc].naam:"eigen locatie";
+  let extra="";
+  const vandaag=Object.keys(wx)[0];
+  if(marine&&marine[vandaag]!=null) extra+=" Zeewater rond "+Math.round(marine[vandaag])+"\u00B0.";
+  if(wx[vandaag]&&wx[vandaag].uv!=null) extra+=" UV-index tot "+Math.round(wx[vandaag].uv)+".";
+  const nachten=plan.map(d=>{const w=wxVoor(d);return w&&w.min!=null?w.min:null;}).filter(v=>v!=null);
+  if(nachten.length){
+    const warmste=Math.max(...nachten), drempel=cfg.unit==="fahrenheit"?77:25;
+    if(warmste>=drempel) extra+=" Warmste nacht "+Math.round(warmste)+deg()+" - zonder airco slaap je licht.";
+  }
+  note.textContent="Verwachting voor "+naam+"."+extra+(wxError?" ("+wxError+")":"");
+  el.innerHTML=plan.map(d=>{ const w=wx[d.date]; if(!w) return "";
+    return `<button class="wx-day" data-date="${d.date}"><div class="d">${d.dag.split(' ')[0]} ${d.date.slice(8)}</div>
+      <div class="ic">${ICONS[w.code]||"\u2600\uFE0F"}</div>
+      <div class="t">${Math.round(w.max)}${deg()} <small>${Math.round(w.min)}</small></div></button>`;}).join("");
+  el.querySelectorAll('.wx-day').forEach(b=>b.onclick=()=>{
+    const t=document.getElementById('day-'+b.dataset.date); if(t) t.scrollIntoView({behavior:'smooth',block:'start'});});
+}
+function renderDays(){
+  const host=document.getElementById('days');
+  host.innerHTML=plan.map(d=>{
+    const w=wxVoor(d), adv=adviesVoor(d);
+    let chips="";
+    if(w){ chips+=`<span class="chip">${ICONS[w.code]||""} ${Math.round(w.max)}${deg()}</span>`;
+      if(w.min!=null){
+        const tropisch = cfg.unit==="fahrenheit" ? w.min>=68 : w.min>=20;
+        const zwaar = cfg.unit==="fahrenheit" ? w.min>=77 : w.min>=25;
+        chips+=`<span class="chip ${zwaar?'warm':''}">nacht ${Math.round(w.min)}${deg()}${zwaar?' \u2013 warm':''}</span>`;
+      }
+      if(w.rainP!=null&&w.rainP>=30) chips+=`<span class="chip wet">regen ${w.rainP}%</span>`;
+      if(w.wind!=null&&w.wind>=cfg.wind) chips+=`<span class="chip wet">wind ${Math.round(w.wind)} km/u</span>`;
+      if(w.uv!=null&&w.uv>=8) chips+=`<span class="chip warm">UV ${Math.round(w.uv)}</span>`; }
+    if(marine&&marine[d.date]!=null) chips+=`<span class="chip">zee ${Math.round(marine[d.date])}\u00B0</span>`;
+    if(d.waarschuwing) chips+=`<span class="chip warm">feestdag</span>`;
+    if(d.wxbron&&d.wxbron!=="thuisbasis"&&w) chips+=`<span class="chip">weer: ${wxNaamVoor(d)}</span>`;
+    const items=d.items.map(i=>`<li><span class="tm">${i.t||""}</span><span class="tx">${
+      i.u?`<a href="${i.u}" target="_blank" rel="noopener">${i.x}</a>`:i.x}${i.s?`<span class="sub">${i.s}</span>`:""}</span></li>`).join("");
+    let tip="";
+    if(w&&w.sunset&&(d.kind||[]).includes("hike")) tip=`<p class="tip">Zon onder om ${w.sunset.slice(11,16)}. Ruim tijd na de wandeling.</p>`;
+    let advHtml="";
+    if(adv){
+      let acties="";
+      const alt = adv.swap==="koelste"?koelsteDag(d.date):adv.swap==="binnen"?droogsteDag(d.date):null;
+      if(alt) acties=`<button class="act primary" data-swap="${d.date}|${alt.date}">Ruil met ${alt.dag}</button>`;
+      if(adv.swap==="binnen"&&cfg.showOpt){ const b=BINNEN[Math.floor(Math.random()*BINNEN.length)];
+        acties+=` <a class="act" href="${b.u}" target="_blank" rel="noopener">${b.naam}</a>`; }
+      advHtml=`<div class="advice ${adv.type==='storm'?'storm':''}">${adv.tekst}${acties?`<div class="advice-actions">${acties}</div>`:""}</div>`;
+    }
+    const km=KAARTEN[d.date];
+    const kaart = km?`<div class="advice-actions" style="padding:0 18px 14px;margin:0">
+      <a class="act" href="${km[1]}" target="_blank" rel="noopener">Navigeer naar ${km[0]}</a></div>`:"";
+    return `<section class="day" id="day-${d.date}"><div class="day-head">
+      <span class="day-date">${d.dag}</span><h3 class="day-title">${d.titel}</h3>${chips}</div>
+      ${d.geruild?`<p class="swapped">Deze dag is geruild op basis van het weer.</p>`:""}
+      <ul class="items">${items}</ul>${kaart}${tip}${advHtml}</section>`;
+  }).join("");
+  host.querySelectorAll('[data-swap]').forEach(b=>b.onclick=()=>{const[a,c]=b.dataset.swap.split('|');ruil(a,c);});
+}
+function renderEclipse(){
+  const el=document.getElementById('eclipseWx');
+  const dagen=Math.ceil((new Date("2026-08-12T20:31:00+02:00")-new Date())/86400000);
+  if(!eclipseCloud){
+    el.innerHTML = dagen>10
+      ? `<span style="font-size:13px;color:#A9C0CE">De bewolkingsverwachting voor die avond komt vanaf ongeveer tien dagen vooraf beschikbaar.</span>`
+      : "";
+    return;
+  }
+  const p=eclipseCloud.pct;
+  /* Hoe verder weg, hoe minder een uurwaarde betekent. Dat hoort erbij te staan. */
+  let waarde, kleur;
+  if(dagen>7){ waarde="Op deze afstand zegt dat nog weinig: zie het als een eerste indruk, niet als een beslissing."; kleur="#A9C0CE"; }
+  else if(dagen>3){ waarde="Begint richting te geven, maar kan nog kantelen. Kijk elke dag opnieuw."; kleur="#EFD9BC"; }
+  else { waarde = p<25?"Uitstekend vooruitzicht.":p<50?"Redelijk, met wat sluierbewolking.":
+                  p<75?"Twijfelachtig. Houd een alternatieve plek achter de hand.":
+                       "Slecht. Overweeg verder westwaarts te rijden of ter plaatse te beslissen."; kleur="#EFD9BC"; }
+  el.innerHTML=`<span style="font-size:13px;color:#A9C0CE">Bewolking rond 20:31 bij ${eclipseCloud.plek}:
+    <b style="color:${kleur}">${p}%</b>. ${waarde}</span>`;
+}
+function renderNu(){
+  const el=document.getElementById('nuBox');
+  if(!el) return;
+  if(!nu){ el.innerHTML=""; return; }
+  const dagen=Math.ceil((new Date("2026-08-10T18:55:00+02:00")-new Date())/86400000);
+  const tel = dagen>1 ? `nog ${dagen} dagen tot vertrek` : dagen===1 ? "morgen vertrek" : "";
+  el.innerHTML=`<div class="panel" style="display:flex;gap:16px;align-items:center;margin-top:18px">
+    <div style="font-size:38px;line-height:1">${ICONS[nu.code]||"\u2600\uFE0F"}</div>
+    <div style="flex:1">
+      <h2 style="margin:0 0 2px">Nu in ${nu.plek}</h2>
+      <p class="lead" style="margin:0">${Math.round(nu.temp)}${deg()}, wind ${Math.round(nu.wind)} km/u,
+        luchtvochtigheid ${Math.round(nu.vocht)}%. Vandaag ${Math.round(nu.max)}${deg()},
+        vannacht niet lager dan ${Math.round(nu.min)}${deg()}.
+        Morgen ${ICONS[nu.morgenCode]||""} ${Math.round(nu.morgenMax)}${deg()}.</p>
+    </div>
+    ${tel?`<div style="text-align:right;font-family:'Fraunces',Georgia,serif;font-weight:600;
+      font-size:13px;color:var(--teal);flex:0 0 auto">${tel}</div>`:""}
+  </div>`;
+}
+function renderPlan(){ renderNu(); renderStrip(); renderDays(); renderEclipse(); }
+
+/* ============ render: paklijst ============ */
+function renderPack(){
+  const host=document.getElementById('view-pack');
+  const alle=PACK.flatMap(g=>g.items);
+  const klaar=alle.filter(i=>packState[i.id]).length;
+  const pct=Math.round(klaar/alle.length*100);
+  host.innerHTML=`<div class="panel"><h2>Paklijst</h2>
+    <p class="lead">${klaar} van ${alle.length} afgevinkt. Blijft bewaard op dit toestel.</p>
+    <div class="progress"><i style="width:${pct}%"></i></div>
+    </div>` + PACK.map(g=>`<div class="panel"><h3 style="margin-top:0">${g.groep}</h3>
+      ${g.items.map(i=>`<div class="check ${packState[i.id]?'done':''}">
+        <input type="checkbox" id="p-${i.id}" data-pack="${i.id}" ${packState[i.id]?'checked':''}>
+        <label for="p-${i.id}">${i.t}${i.w?`<span class="why">${i.w}</span>`:""}</label></div>`).join("")}
+      </div>`).join("") +
+    `<div class="panel"><div class="advice-actions">
+      <button class="act" id="packReset">Alles uitvinken</button></div></div>`;
+  host.querySelectorAll('[data-pack]').forEach(c=>c.onchange=async()=>{
+    packState[c.dataset.pack]=c.checked; await set('mallorca:pack',packState); renderPack();});
+  const rb=document.getElementById('packReset');
+  if(rb) rb.onclick=async()=>{ packState={}; await set('mallorca:pack',packState); renderPack(); };
+}
+
+/* ============ render: budget ============ */
+function euro(n){ return "\u20AC " + n.toLocaleString('nl-BE',{minimumFractionDigits:Number.isInteger(n)?0:2,maximumFractionDigits:2}); }
+function geldAan(id,def){ return geldState[id]===undefined?def:geldState[id]; }
+function renderGeld(){
+  const host=document.getElementById('view-geld');
+  const blok=(titel,lijst,uitleg)=>`<div class="panel"><h3 style="margin-top:0">${titel}</h3>
+    ${uitleg?`<p class="lead">${uitleg}</p>`:""}
+    ${lijst.map(i=>i.bedrag===null?`<div class="check"><span style="width:19px"></span>
+        <label style="cursor:default">${i.t}<span class="why">${i.n}</span></label>
+        <span class="num" style="margin-left:auto;color:var(--grey);font-size:13px">-</span></div>`
+      :`<div class="check"><input type="checkbox" id="g-${i.id}" data-geld="${i.id}" ${geldAan(i.id,i.aan!==false)?'checked':''}>
+        <label for="g-${i.id}">${i.t}<span class="why">${i.n}</span></label>
+        <span class="num" style="margin-left:auto;font-variant-numeric:tabular-nums;font-weight:600">${euro(i.bedrag)}</span></div>`).join("")}
+    </div>`;
+  const som=lijst=>lijst.filter(i=>i.bedrag!==null&&geldAan(i.id,i.aan!==false)).reduce((a,i)=>a+i.bedrag,0);
+  const t1=som(GELD.vast),t2=som(GELD.gepland),t3=som(GELD.eten),t4=som(GELD.optie);
+  const totaal=t1+t2+t3+t4;
+  host.innerHTML=`<div class="panel"><h2>Budget</h2>
+    <p class="lead">Vier personen. Omdat de kinderen 14 en 16 zijn, geldt overal het volwassentarief:
+      kindertarieven lopen tot 10 jaar bij Aqualand en tot 12 jaar bij de grotten en op de trein.
+      Vink aan of uit om te zien wat een keuze kost. Verblijf en huurauto zijn geboekt en zitten erin.</p>
+    <div class="total"><span>Geraamd totaal</span><b id="geldTotaal">${euro(Math.round(totaal))}</b></div>
+    <p class="lead" style="margin:8px 0 0;text-align:right">Ongeveer ${euro(Math.round(totaal/4))} per persoon.</p></div>`
+    + blok("Reizen en bagage",GELD.vast)
+    + blok("Geplande activiteiten",GELD.gepland,"Samen "+euro(t2)+".")
+    + blok("Eten en drinken",GELD.eten,"Ruwe schatting over tien dagen: "+euro(t3)+".")
+    + blok("Optioneel",GELD.optie,"Nog niet ingepland. Samen "+euro(t4)+" als je alles doet.")
+    + `<div class="panel"><p class="lead" style="margin:0">Prijzen zijn indicaties uit augustus 2026 en kunnen wijzigen.
+       Controleer de officiele sites voor je boekt.</p></div>`;
+  host.querySelectorAll('[data-geld]').forEach(c=>c.onchange=async()=>{
+    geldState[c.dataset.geld]=c.checked; await set('mallorca:geld',geldState); renderGeld();});
+}
+
+/* ============ render: info ============ */
+function renderInfo(){
+  const host=document.getElementById('view-info');
+  host.innerHTML=`
+  <div class="panel"><h2>Bij nood</h2>
+    <p class="lead">Bel 112 bij levensgevaar. De rest is voor gewone kwalen en ongemakken.</p>
+    <table class="rows"><tbody>${INFO_NOOD.map(r=>`<tr><td><b>${r[0]}</b><br>
+      <span style="color:var(--grey);font-size:12.5px">${r[2]}</span></td>
+      <td class="num"><a href="tel:${r[1].replace(/\s/g,'')}">${r[1]}</a></td></tr>`).join("")}</tbody></table>
+    <p class="lead" style="margin-top:12px">Neem de Europese ziekteverzekeringskaart mee: daarmee word je in een
+      centro de salud behandeld zoals een Spanjaard. Zonder kaart betaal je ter plaatse en recupereer je achteraf.</p>
+  </div>
+  <div class="panel"><h2>Rijden in Spanje</h2>
+    <ul style="margin:0;padding-left:18px;font-size:14px">${INFO_AUTO.map(t=>`<li style="margin-bottom:7px">${t}</li>`).join("")}</ul>
+  </div>
+  <div class="panel"><h2>Reisgegevens</h2>
+    <table class="rows"><tbody>${INFO_REIS.map(r=>`<tr><td style="color:var(--grey);width:38%">${r[0]}</td>
+      <td><b>${r[1]}</b></td></tr>`).join("")}</tbody></table>
+  </div>
+  <div class="panel"><h2>Handig om te tonen</h2>
+    <p class="lead">Aan een taxichauffeur of als je de weg kwijt bent:</p>
+    <p style="font-size:16px;font-family:'Fraunces',Georgia,serif;background:var(--sand);padding:12px;border-radius:10px;margin:0">
+      Voy a Via del Foner 49, Canyamel, Capdepera.</p>
+  </div>
+  <div class="panel"><h2>Documenten</h2>
+    <div class="advice-actions">
+      <a class="act" href="./Mallorca_Canyamel_10-19_augustus_2026.pdf" download>Reisgids als PDF</a>
+      <button class="act" id="icsBtn2">Agendabestand</button>
+    </div>
+    <p class="lead" style="margin-top:10px">Download de PDF een keer als je nog verbinding hebt; daarna blijft
+      hij ook zonder netwerk beschikbaar.</p>
+  </div>`;
+  const b=document.getElementById('icsBtn2'); if(b) b.onclick=downloadICS;
+}
+
+/* ============ tabs ============ */
+const VIEWS={plan:"view-plan",pack:"view-pack",geld:"view-geld",info:"view-info"};
+function showTab(name){
+  tab=name;
+  Object.entries(VIEWS).forEach(([k,id])=>{
+    document.getElementById(id).hidden = (k!==name);
+    document.getElementById('tab-'+k).setAttribute('aria-selected', k===name?'true':'false');
+  });
+  document.getElementById('wxStrip').style.display = name==='plan'?'flex':'none';
+  document.getElementById('wxNote').style.display = name==='plan'?'block':'none';
+  if(name==='pack') renderPack();
+  if(name==='geld') renderGeld();
+  if(name==='info') renderInfo();
+  window.scrollTo({top:0,behavior:'instant'});
+  set('mallorca:tab',name);
+}
+Object.keys(VIEWS).forEach(k=>{ document.getElementById('tab-'+k).onclick=()=>showTab(k); });
+
+/* ============ aftellen ============ */
+function tick(){
+  const doel=new Date("2026-08-12T20:31:00+02:00"), nu=new Date();
+  const el=document.getElementById('countdown');
+  let ms=doel-nu;
+  if(ms<=0){ el.textContent = ms>-120000?"Nu!":"Voorbij"; return; }
+  const d=Math.floor(ms/86400000); ms-=d*86400000;
+  const h=Math.floor(ms/3600000); ms-=h*3600000;
+  const m=Math.floor(ms/60000);
+  el.textContent = d>0?`nog ${d} dagen, ${h} uur`:`nog ${h} uur ${m} min`;
+}
+
+/* ============ instellingenpaneel ============ */
+const bg=document.getElementById('sheetBg');
+function vulSheet(){
+  document.getElementById('locSel').value=cfg.loc;
+  document.getElementById('unitSel').value=cfg.unit;
+  document.getElementById('rainIn').value=cfg.rain;
+  document.getElementById('heatIn').value=cfg.heat;
+  document.getElementById('windIn').value=cfg.wind;
+  document.getElementById('autoAdv').checked=cfg.autoAdv;
+  document.getElementById('showOpt').checked=cfg.showOpt;
+  document.getElementById('latIn').value=cfg.lat;
+  document.getElementById('lonIn').value=cfg.lon;
+  document.getElementById('dlKey').value=cfg.dlKey||"";
+  document.getElementById('dlEnt').value=cfg.dlEnt||"";
+  document.getElementById('dlHalte').value=cfg.dlHalte||"";
+  document.getElementById('dlLat').value=cfg.dlLat||50.873;
+  document.getElementById('dlLon').value=cfg.dlLon||4.762;
+  document.getElementById('halteLijst').innerHTML='';
+  document.getElementById('customCoords').style.display=cfg.loc==="custom"?"flex":"none";
+  const s=document.getElementById('dlStatus'); s.className='status'; s.textContent='';
+}
+document.getElementById('menuBtn').onclick=()=>{vulSheet();bg.classList.add('open');};
+document.getElementById('closeSheet').onclick=()=>bg.classList.remove('open');
+bg.onclick=e=>{ if(e.target===bg) bg.classList.remove('open'); };
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') bg.classList.remove('open'); });
+document.getElementById('locSel').onchange=e=>{
+  document.getElementById('customCoords').style.display=e.target.value==="custom"?"flex":"none"; };
+document.getElementById('testDL').onclick=testDeLijn;
+document.getElementById('zoekHalte').onclick=zoekHaltes;
+document.getElementById('icsBtn').onclick=downloadICS;
+
+document.getElementById('saveSheet').onclick=async()=>{
+  cfg.loc=document.getElementById('locSel').value;
+  if(cfg.loc==="custom"){
+    cfg.lat=parseFloat(document.getElementById('latIn').value)||DEFAULTS.lat;
+    cfg.lon=parseFloat(document.getElementById('lonIn').value)||DEFAULTS.lon;
+  }else{ cfg.lat=LOCS[cfg.loc].lat; cfg.lon=LOCS[cfg.loc].lon; }
+  cfg.unit=document.getElementById('unitSel').value;
+  cfg.rain=+document.getElementById('rainIn').value||DEFAULTS.rain;
+  cfg.heat=+document.getElementById('heatIn').value||DEFAULTS.heat;
+  cfg.wind=+document.getElementById('windIn').value||DEFAULTS.wind;
+  cfg.autoAdv=document.getElementById('autoAdv').checked;
+  cfg.showOpt=document.getElementById('showOpt').checked;
+  cfg.dlKey=document.getElementById('dlKey').value.trim();
+  cfg.dlEnt=document.getElementById('dlEnt').value.trim();
+  cfg.dlHalte=document.getElementById('dlHalte').value.trim();
+  cfg.dlLat=parseFloat(document.getElementById('dlLat').value)||50.873;
+  cfg.dlLon=parseFloat(document.getElementById('dlLon').value)||4.762;
+  await set('mallorca:cfg',cfg);
+  bg.classList.remove('open');
+  await Promise.all([loadWeather(),loadNu()]); await loadMarine(); await loadEclipseSky();
+  renderPlan();
+};
+document.getElementById('resetPlan').onclick=async()=>{
+  plan=basePlan(); packState={}; geldState={};
+  await set('mallorca:plan',plan); await set('mallorca:pack',packState); await set('mallorca:geld',geldState);
+  bg.classList.remove('open'); renderPlan(); showTab('plan');
+};
+
+/* ============ start ============ */
+(async function(){
+  const c=await get('mallorca:cfg'); if(c) cfg=Object.assign({},DEFAULTS,c);
+  plan=await get('mallorca:plan'); if(!plan) plan=basePlan();
+  packState=await get('mallorca:pack')||{};
+  geldState=await get('mallorca:geld')||{};
+  renderPlan();
+  const t=await get('mallorca:tab'); if(t&&VIEWS[t]) showTab(t); else showTab('plan');
+  tick(); setInterval(tick,30000);
+  await Promise.all([loadWeather(),loadNu()]);
+  renderPlan();
+  await loadMarine(); await loadEclipseSky();
+  renderPlan();
+  renderReis();
+  renderVlucht();
+  if('serviceWorker' in navigator && location.protocol.startsWith('http')){
+    navigator.serviceWorker.register('./sw.js').then(reg=>{
+      /* Staat er een nieuwere versie klaar, zeg dat dan in plaats van
+         stilletjes de oude te blijven tonen. */
+      reg.addEventListener('updatefound',()=>{
+        const nieuw=reg.installing; if(!nieuw) return;
+        nieuw.addEventListener('statechange',()=>{
+          if(nieuw.state==='installed' && navigator.serviceWorker.controller) meldNieuweVersie(reg);
+        });
+      });
+    }).catch(()=>{});
+    let herladen=false;
+    navigator.serviceWorker.addEventListener('controllerchange',()=>{
+      if(herladen) return; herladen=true; location.reload();
+    });
+  }
+})();
+
+function meldNieuweVersie(reg){
+  if(document.getElementById('nieuweVersie')) return;
+  const b=document.createElement('div');
+  b.id='nieuweVersie';
+  b.style.cssText="position:fixed;left:16px;right:16px;bottom:16px;z-index:60;background:var(--deep);"+
+    "color:#EFF3F5;padding:13px 16px;border-radius:12px;box-shadow:0 10px 30px rgba(19,36,54,.35);"+
+    "display:flex;gap:12px;align-items:center;font-size:13.5px;max-width:520px;margin:0 auto";
+  b.innerHTML=`<span style="flex:1">Er staat een nieuwere versie klaar.</span>
+    <button class="act" style="color:#EFD9BC;border-color:#EFD9BC">Nu bijwerken</button>`;
+  b.querySelector('button').onclick=()=>{
+    if(reg.waiting) reg.waiting.postMessage('neem-over'); else location.reload();
+  };
+  document.body.appendChild(b);
+}
+
+/* ============ bijwerken als je terugkeert ============ */
+let laatsteVerversing=Date.now();
+async function ververs(reden){
+  const nu=Date.now();
+  if(nu-laatsteVerversing < 60000) return;   /* niet vaker dan een keer per minuut */
+  laatsteVerversing=nu;
+  await Promise.all([loadWeather(),loadNu()]);
+  await Promise.all([loadMarine(),loadEclipseSky()]);
+  renderPlan();
+  renderReis();
+  renderVlucht();   /* respecteert zelf het budget */
+}
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden) ververs('terug'); });
+window.addEventListener('online',()=>{ laatsteVerversing=0; ververs('online'); });
+setInterval(()=>{ if(!document.hidden) ververs('timer'); }, 15*60*1000);
+</script>
+</body>
+</html>

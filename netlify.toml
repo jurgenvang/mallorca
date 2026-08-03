@@ -1,0 +1,16 @@
+# Netlify-configuratie voor de reisplanner Canyamel 2026
+# Sleep de map met index.html en dit bestand naar app.netlify.com/drop, of koppel een Git-repo.
+
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"

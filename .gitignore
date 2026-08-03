@@ -1,0 +1,12 @@
+# omgevingsvariabelen horen bij de host, nooit in de repository
+.env
+.env.*
+!.env.example
+
+# lokale rommel
+.DS_Store
+Thumbs.db
+node_modules/
+.netlify/
+.wrangler/
+dist/
