@@ -212,7 +212,7 @@ footer a{color:var(--teal)}
   <footer>
     Weer via Open-Meteo &middot; treininfo via iRail &middot; tijden zijn richtlijnen<br>
     <a href="./Mallorca_Canyamel_10-19_augustus_2026.pdf" download>Volledige reisgids downloaden (PDF)</a><br>
-    <span style="opacity:.7">versie 2026.08.03-5</span>
+    <span style="opacity:.7">versie 2026.08.03-8</span>
   </footer>
 </div>
 
@@ -220,7 +220,7 @@ footer a{color:var(--teal)}
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
     <h2 id="sheetTitle">Instellingen</h2>
     <p class="lead">Bepaal waar het weer vandaan komt, wanneer de app voorstelt om dagen te ruilen, en of je live busgegevens wilt.
-       <br><b>Versie 2026.08.03-5</b> - vergelijk dit met de versie in je zip om te zien of het gepubliceerde bestand actueel is.</p>
+       <br><b>Versie 2026.08.03-8</b> - vergelijk dit met de versie in je zip om te zien of het gepubliceerde bestand actueel is.</p>
 
     <div class="field">
       <label for="locSel">Weerlocatie</label>
@@ -317,6 +317,17 @@ const LOCS = {
   salines:{lat:39.2650,lon:3.0531,naam:"Cap de ses Salines"},
   arenal:{lat:39.4957,lon:2.7595,naam:"Aqualand S'Arenal"}
 };
+/* Waar je die dag werkelijk bent. Canyamel is de standaard; deze wijken af. */
+const PLAATSEN = {
+  thuisbasis:{lat:39.6567,lon:3.4407,naam:"Canyamel"},
+  arta:{lat:39.6958,lon:3.3497,naam:"Arta"},
+  arenal:{lat:39.4957,lon:2.7595,naam:"Aqualand, Palma"},
+  kijkplek:{lat:39.3636,lon:2.7878,naam:"Cap Blanc"},
+  ratjada:{lat:39.7127,lon:3.4608,naam:"Cala Ratjada"},
+  sacoma:{lat:39.5817,lon:3.3626,naam:"Sa Coma"},
+  capdepera:{lat:39.7042,lon:3.4328,naam:"Capdepera"}
+};
+
 const DEFAULTS = {loc:"canyamel",lat:39.6567,lon:3.4407,unit:"celsius",
   rain:55,heat:33,wind:35,autoAdv:true,showOpt:true,dlKey:"",dlEnt:"",dlHalte:"",dlProxy:false,dlLat:50.873,dlLon:4.762};
 let cfg = Object.assign({},DEFAULTS);
@@ -338,7 +349,8 @@ function basePlan(){ return [
  {date:"2026-08-09",dag:"Zo 9 aug",titel:"Voorbereiding",kind:["thuis"],vast:true,items:[
    {t:"18:55",x:"<b>Online inchecken opent</b> voor de heenvlucht",s:"24 uur voor vertrek. Meteen doen geeft de beste kans op vier stoelen naast elkaar.",u:"https://www.vueling.com/nl"},
    {t:"",x:"Bagage nameten",s:"40 x 30 x 20 cm is een rugzak, geen trolley. Een cabinekoffer van 55 x 40 x 20 past hier niet in en kost extra."},
-   {t:"",x:"Ruimbagage geboekt?",s:"Vier personen, tien dagen, alleen rugzakken inbegrepen. Vooraf boeken kost vanaf 10 euro, aan de balie een veelvoud.",u:"https://www.vueling.com/nl"}
+   {t:"",x:"Ruimbagage geboekt?",s:"Vier personen, tien dagen, alleen rugzakken inbegrepen. Vooraf boeken kost vanaf 10 euro, aan de balie een veelvoud.",u:"https://www.vueling.com/nl"},
+   {t:"",x:"Nog even Spaans oefenen",s:"Claro, La Tengo - de oefenapp bij Espanol FAST A1. Een kwartier per dag scheelt op de markt en in het restaurant.",u:"https://clarolatengo.jurgenvang.workers.dev/"}
  ]},
  {date:"2026-08-10",dag:"Ma 10 aug",titel:"Heenreis en aankomst",kind:["travel"],vast:true,items:[
    {t:"15:35",x:"Halte voor de deur, richting Leuven",s:"Lijn 3. De halte voor de terugrit ligt 75 m verderop aan de overkant."},
@@ -348,7 +360,7 @@ function basePlan(){ return [
    {t:"18:55",x:"Vlucht VY 3651 naar Palma",s:"Aankomst 21:10. Daarna huurauto ophalen."},
    {t:"22:15",x:"Rijden naar Canyamel",s:"Ca. 1 uur via de Ma-15. Neem water mee: 's nachts is alles dicht."}
  ]},
- {date:"2026-08-11",dag:"Di 11 aug",titel:"Acclimatiseren en markt van Arta",kind:["beach","outdoor"],items:[
+ {date:"2026-08-11",dag:"Di 11 aug",titel:"Acclimatiseren en markt van Arta",kind:["beach","outdoor"],wxbron:"arta",items:[
    {t:"09:30",x:"Boodschappen bij Eroski of Bip Bip",s:"Beide op vijf minuten lopen."},
    {t:"10:30",x:"Markt van Arta",s:"Elke dinsdag, kunstnijverheid. Ca. 15 min rijden."},
    {t:"15:00",x:"Strand van Canyamel",s:"Ondiep en rustig. Waterfiets of kajak ter plaatse, ca. 30 euro per uur."},
@@ -378,7 +390,7 @@ function basePlan(){ return [
    {t:"15:00",x:"Strand of zwembad"},
    {t:"19:00",x:"Diner bij Cala Rotja",s:"Dagelijks 11:00-22:30, zeezicht. Tel. +34 971 84 15 13.",u:"https://www.calarotja.es/"}
  ]},
- {date:"2026-08-15",dag:"Za 15 aug",titel:"Cala Ratjada",kind:["beach","outdoor"],waarschuwing:"Spaanse feestdag: overal druk, veel winkels dicht.",items:[
+ {date:"2026-08-15",dag:"Za 15 aug",titel:"Cala Ratjada",kind:["beach","outdoor"],wxbron:"ratjada",waarschuwing:"Spaanse feestdag: overal druk, veel winkels dicht.",items:[
    {t:"09:00",x:"Zaterdagmarkt Cala Ratjada",s:"Carrer d'Elionor Servera, tot ca. 13:00. Vroeg zijn."},
    {t:"12:30",x:"Cala Agulla",s:"Mooiste strand van de streek. Vroeg parkeren. Ligbed ca. 20 euro."},
    {t:"19:30",x:"Diner bij Porxada de Sa Torre",s:"Reserveren op +34 971 84 13 10, zeker op een feestdag.",u:"http://www.torredecanyamel.com/es/gastronomia/porxada-de-sa-torre/"},
@@ -392,13 +404,13 @@ function basePlan(){ return [
    {t:"11:00",x:"Terug in Canyamel",s:"10 tot 13 km, 3u20 tot 3u40, ca. 330 hoogtemeters."},
    {t:"20:00",x:"Sant Roc, slotdag",s:"Plechtige mis en vuurwerk op muziek aan de haven van Cala Ratjada. Gratis, wel druk: kom vroeg voor parking.",u:"https://visitcapdepera.com/en/sant-roc-festivals/"}
  ]},
- {date:"2026-08-17",dag:"Ma 17 aug",titel:"Safari Mallorca en Fantasy Park",kind:["park","outdoor"],items:[
+ {date:"2026-08-17",dag:"Ma 17 aug",titel:"Safari Mallorca en Fantasy Park",kind:["park","outdoor"],wxbron:"sacoma",items:[
    {t:"09:00",x:"Safari Mallorca in Sa Coma",s:"Opent 9:00. Safaritrein 30 min, daarna wandelgedeelte. Gratis parking.",u:"http://www.safarimallorca.es/"},
    {t:"13:00",x:"Lunch en middag in Cala Millor"},
    {t:"",x:"Alternatief voor de hele dag: Alcudia",s:"Wakepark aan de kabelbaan, eventueel met Hidropark ernaast. Ca. 1 uur rijden. Kitesurfen kan alleen daar: het oosten ligt in de luwte."},
    {t:"17:00",x:"Fantasy Park",s:"Opent pas 16:30, tot middernacht. Voor 14 en 16 jaar vooral de karting.",u:"https://fantasyparkmallorca.com/"}
  ]},
- {date:"2026-08-18",dag:"Di 18 aug",titel:"Capdepera en vrije dag",kind:["outdoor"],items:[
+ {date:"2026-08-18",dag:"Di 18 aug",titel:"Capdepera en vrije dag",kind:["outdoor"],wxbron:"capdepera",items:[
    {t:"10:00",x:"Castell de Capdepera",s:"Half uur volstaat. Parkeren op ca. 15 min lopen.",u:"http://www.capdeperacastell.com/"},
    {t:"11:30",x:"Laatste inkopen bij Mercadona Capdepera"},
    {t:"14:00",x:"Favoriete strand nog een keer"},
@@ -442,7 +454,8 @@ const PACK = [
   {id:"idkaart",t:"Vier identiteitskaarten, vervaldatum gecontroleerd",w:"Een verlopen kaart merk je pas aan de incheckbalie. Kijk nu na, vernieuwen duurt weken."},
   {id:"rijbewijs",t:"Rijbewijs en creditcard van de hoofdbestuurder",w:"Verhuurders vragen bijna altijd een creditcard op naam."},
   {id:"gpx",t:"GPS-track van de wandeling offline opgeslagen",w:"Niet bewegwijzerd, en op de hoogte valt het netwerk weg."},
-  {id:"pdf",t:"Deze reisgids offline op de telefoon",w:"PDF downloaden via de link onderaan."}
+  {id:"pdf",t:"Deze reisgids offline op de telefoon",w:"PDF downloaden via de link onderaan."},
+  {id:"spaans",t:"Spaans opfrissen",w:"Claro, La Tengo staat bij Info. Een kwartier per dag in de weken voor vertrek."}
  ]},
  {groep:"Voor de eclips",items:[
   {id:"statief",t:"Statief of iets om de telefoon op te leggen"},
@@ -572,38 +585,74 @@ const EVENTS = [
 ];
 
 /* ============ weer ============ */
-async function fetchDaily(lat,lon){
-  const p=new URLSearchParams({latitude:lat,longitude:lon,
+const REIS_START="2026-08-09", REIS_EIND="2026-08-19";
+
+/* Open-Meteo kijkt zestien dagen vooruit. Vraag je een datumbereik dat daar
+   voorbij reikt, dan antwoordt het met een fout in plaats van met wat het wel
+   weet. Daarom vragen we gewoon "de komende zestien dagen" en houden we zelf
+   de dagen over die binnen de reis vallen. Dagen die nog te ver weg liggen,
+   vullen zich vanzelf naarmate de reis nadert. */
+/* Meerdere plaatsen in een aanvraag: Open-Meteo geeft dan een lijst terug. */
+async function fetchDailyMulti(plekken){
+  const p=new URLSearchParams({
+    latitude:plekken.map(x=>x.lat).join(","),
+    longitude:plekken.map(x=>x.lon).join(","),
     daily:"weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,cloud_cover_mean,uv_index_max,sunset",
-    timezone:"Europe/Madrid",temperature_unit:cfg.unit,start_date:"2026-08-09",end_date:"2026-08-19"});
+    timezone:"Europe/Madrid",temperature_unit:cfg.unit,forecast_days:"16"});
   const r=await fetch("https://api.open-meteo.com/v1/forecast?"+p);
   if(!r.ok) throw new Error("status "+r.status);
-  const j=await r.json(); const out={};
-  j.daily.time.forEach((d,i)=>{ out[d]={code:j.daily.weather_code[i],max:j.daily.temperature_2m_max[i],
-    min:j.daily.temperature_2m_min[i],rain:j.daily.precipitation_sum[i],
-    rainP:j.daily.precipitation_probability_max[i],wind:j.daily.wind_speed_10m_max[i],
-    cloud:j.daily.cloud_cover_mean[i],uv:j.daily.uv_index_max[i],sunset:j.daily.sunset[i]}; });
+  const j=await r.json();
+  const lijst = Array.isArray(j) ? j : [j];
+  return plekken.map((_,i)=> lijst[i] ? uitDaily(lijst[i]) : {});
+}
+function uitDaily(j){
+  const out={};
+  if(!j||!j.daily||!j.daily.time) return out;
+  j.daily.time.forEach((d,i)=>{
+    if(d<REIS_START || d>REIS_EIND) return;
+    out[d]={code:j.daily.weather_code[i],max:j.daily.temperature_2m_max[i],
+      min:j.daily.temperature_2m_min[i],rain:j.daily.precipitation_sum[i],
+      rainP:j.daily.precipitation_probability_max[i],wind:j.daily.wind_speed_10m_max[i],
+      cloud:j.daily.cloud_cover_mean[i],uv:j.daily.uv_index_max[i],sunset:j.daily.sunset[i]};
+  });
   return out;
 }
 
-/* Het weer wordt per plek opgehaald: waar je die dag echt bent.
-   Aqualand ligt 75 km verderop bij Palma, de eclipsplek nog verder zuidwaarts. */
+async function fetchDaily(lat,lon){
+  const p=new URLSearchParams({latitude:lat,longitude:lon,
+    daily:"weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,cloud_cover_mean,uv_index_max,sunset",
+    timezone:"Europe/Madrid",temperature_unit:cfg.unit,forecast_days:"16"});
+  const r=await fetch("https://api.open-meteo.com/v1/forecast?"+p);
+  if(!r.ok) throw new Error("status "+r.status);
+  const j=await r.json();
+  if(!j || !j.daily || !j.daily.time) throw new Error("onverwacht antwoord");
+  const out={};
+  j.daily.time.forEach((d,i)=>{
+    if(d<REIS_START || d>REIS_EIND) return;
+    out[d]={code:j.daily.weather_code[i],max:j.daily.temperature_2m_max[i],
+      min:j.daily.temperature_2m_min[i],rain:j.daily.precipitation_sum[i],
+      rainP:j.daily.precipitation_probability_max[i],wind:j.daily.wind_speed_10m_max[i],
+      cloud:j.daily.cloud_cover_mean[i],uv:j.daily.uv_index_max[i],sunset:j.daily.sunset[i]};
+  });
+  return out;
+}
+
+/* Het weer wordt per plek opgehaald: waar je die dag werkelijk bent.
+   Open-Meteo aanvaardt meerdere plaatsen in een aanvraag, dus dit kost
+   evenveel als een enkele opvraging. */
 async function loadWeather(){
+  const sleutels=Object.keys(PLAATSEN);
   const eigen = LOCS[cfg.loc] || {lat:cfg.lat,lon:cfg.lon,naam:"eigen locatie"};
-  const plekken = {
-    thuisbasis: eigen,
-    arenal: LOCS.arenal,
-    kijkplek: cfg.loc==="salines" ? LOCS.salines : LOCS.capblanc
-  };
+  const plekken = sleutels.map(k=>{
+    if(k==="thuisbasis") return eigen;
+    if(k==="kijkplek") return cfg.loc==="salines" ? LOCS.salines : LOCS.capblanc;
+    return PLAATSEN[k];
+  });
   try{
-    const [a,b,c] = await Promise.all([
-      fetchDaily(plekken.thuisbasis.lat,plekken.thuisbasis.lon),
-      fetchDaily(plekken.arenal.lat,plekken.arenal.lon),
-      fetchDaily(plekken.kijkplek.lat,plekken.kijkplek.lon)
-    ]);
-    wxSets={thuisbasis:a,arenal:b,kijkplek:c};
-    wxNamen={thuisbasis:plekken.thuisbasis.naam,arenal:plekken.arenal.naam,kijkplek:plekken.kijkplek.naam};
-    wx=a; wxError=null;
+    const sets = await fetchDailyMulti(plekken);
+    wxSets={}; wxNamen={};
+    sleutels.forEach((k,i)=>{ wxSets[k]=sets[i]; wxNamen[k]=plekken[i].naam; });
+    wx=wxSets.thuisbasis; wxError=null;
     await set('mallorca:wxcache',{when:Date.now(),sets:wxSets,namen:wxNamen});
   }catch(e){
     wxError=e.message||"verbinding mislukt";
@@ -642,16 +691,24 @@ async function loadNu(){
 
 async function loadMarine(){
   const p = new URLSearchParams({latitude:39.6567,longitude:3.4407,
-    daily:"sea_surface_temperature_max",timezone:"Europe/Madrid",
-    start_date:"2026-08-09",end_date:"2026-08-19"});
+    daily:"sea_surface_temperature_max",timezone:"Europe/Madrid",forecast_days:"16"});
   try{
-    const r = await fetch("https://marine-api.open-meteo.com/v1/marine?"+p);
+    const r=await fetch("https://marine-api.open-meteo.com/v1/marine?"+p);
     if(!r.ok) throw new Error();
-    const j = await r.json();
-    marine={}; j.daily.time.forEach((d,i)=>{ marine[d]=j.daily.sea_surface_temperature_max[i]; });
+    const j=await r.json();
+    if(!j||!j.daily||!j.daily.time) throw new Error();
+    marine={};
+    j.daily.time.forEach((d,i)=>{
+      if(d<REIS_START||d>REIS_EIND) return;
+      marine[d]=j.daily.sea_surface_temperature_max[i];
+    });
   }catch(e){ marine=null; }
 }
+
 async function loadEclipseSky(){
+  /* Buiten de zestien dagen weet Open-Meteo hier nog niets van. */
+  const dagen=(new Date("2026-08-12")-new Date())/86400000;
+  if(dagen>15){ eclipseCloud=null; return; }
   const loc = LOCS[cfg.loc==="salines"?"salines":"capblanc"];
   const p = new URLSearchParams({latitude:loc.lat,longitude:loc.lon,hourly:"cloud_cover",
     timezone:"Europe/Madrid",start_date:"2026-08-12",end_date:"2026-08-12"});
@@ -1138,7 +1195,11 @@ function renderStrip(){
     const warmste=Math.max(...nachten), drempel=cfg.unit==="fahrenheit"?77:25;
     if(warmste>=drempel) extra+=" Warmste nacht "+Math.round(warmste)+deg()+" - zonder airco slaap je licht.";
   }
-  note.textContent="Verwachting voor "+naam+"."+extra+(wxError?" ("+wxError+")":"");
+  const bekend=plan.filter(d=>wxVoor(d)).length;
+  const nogniet = bekend<plan.length
+    ? ` ${plan.length-bekend} ${plan.length-bekend===1?"dag ligt":"dagen liggen"} nog buiten de verwachting.`
+    : "";
+  note.textContent="Verwachting voor "+naam+"."+extra+nogniet+(wxError?" ("+wxError+")":"");
   el.innerHTML=plan.map(d=>{ const w=wx[d.date]; if(!w) return "";
     return `<button class="wx-day" data-date="${d.date}"><div class="d">${d.dag.split(' ')[0]} ${d.date.slice(8)}</div>
       <div class="ic">${ICONS[w.code]||"\u2600\uFE0F"}</div>
@@ -1163,10 +1224,17 @@ function renderDays(){
     if(marine&&marine[d.date]!=null) chips+=`<span class="chip">zee ${Math.round(marine[d.date])}\u00B0</span>`;
     if(d.waarschuwing) chips+=`<span class="chip warm">feestdag</span>`;
     if(d.wxbron&&d.wxbron!=="thuisbasis"&&w) chips+=`<span class="chip">weer: ${wxNaamVoor(d)}</span>`;
+    if(!w) chips+=`<span class="chip">weer nog niet bekend</span>`;
     const items=d.items.map(i=>`<li><span class="tm">${i.t||""}</span><span class="tx">${
       i.u?`<a href="${i.u}" target="_blank" rel="noopener">${i.x}</a>`:i.x}${i.s?`<span class="sub">${i.s}</span>`:""}</span></li>`).join("");
     let tip="";
-    if(w&&w.sunset&&(d.kind||[]).includes("hike")) tip=`<p class="tip">Zon onder om ${w.sunset.slice(11,16)}. Ruim tijd na de wandeling.</p>`;
+    if(!w && !wxError){
+      const dagen=Math.max(0,Math.ceil((new Date(d.date)-new Date())/86400000)-15);
+      tip=`<p class="tip" style="background:#F2F0EA;border-left-color:var(--line);color:var(--grey)">
+        De verwachting reikt zestien dagen vooruit, dus deze dag valt er nog buiten.
+        ${dagen>0?`Vanaf over ${dagen} ${dagen===1?"dag":"dagen"} verschijnt ze hier.`:"Ze verschijnt hier binnenkort."}</p>`;
+    }
+    else if(w&&w.sunset&&(d.kind||[]).includes("hike")) tip=`<p class="tip">Zon onder om ${w.sunset.slice(11,16)}. Ruim tijd na de wandeling.</p>`;
     let advHtml="";
     if(adv){
       let acties="";
@@ -1305,6 +1373,24 @@ function renderInfo(){
     <p class="lead">Aan een taxichauffeur of als je de weg kwijt bent:</p>
     <p style="font-size:16px;font-family:'Fraunces',Georgia,serif;background:var(--sand);padding:12px;border-radius:10px;margin:0">
       Voy a Via del Foner 49, Canyamel, Capdepera.</p>
+  </div>
+  <div class="panel"><h2>Spaans oefenen</h2>
+    <p class="lead">Een kwartier per dag voor vertrek scheelt op de markt, in het restaurant en aan de
+      balie van de fietsverhuur. Op Mallorca spreekt men Catalaans onder elkaar, maar iedereen spreekt
+      Spaans en dat wordt gewaardeerd.</p>
+    <div class="advice-actions">
+      <a class="act" href="https://clarolatengo.jurgenvang.workers.dev/" target="_blank" rel="noopener">Claro, La Tengo openen</a>
+    </div>
+  </div>
+  <div class="panel"><h2>Handig om te kennen</h2>
+    <table class="rows"><tbody>
+      <tr><td style="color:var(--grey);width:46%">Twee tickets, alstublieft</td><td><b>Dos entradas, por favor</b></td></tr>
+      <tr><td style="color:var(--grey)">Waar is het strand?</td><td><b>&iquest;D&oacute;nde est&aacute; la playa?</b></td></tr>
+      <tr><td style="color:var(--grey)">De rekening, alstublieft</td><td><b>La cuenta, por favor</b></td></tr>
+      <tr><td style="color:var(--grey)">Voor hoeveel uur?</td><td><b>&iquest;Por cu&aacute;ntas horas?</b></td></tr>
+      <tr><td style="color:var(--grey)">Ik heb hulp nodig</td><td><b>Necesito ayuda</b></td></tr>
+      <tr><td style="color:var(--grey)">Is er een apotheek in de buurt?</td><td><b>&iquest;Hay una farmacia cerca?</b></td></tr>
+    </tbody></table>
   </div>
   <div class="panel"><h2>Documenten</h2>
     <div class="advice-actions">

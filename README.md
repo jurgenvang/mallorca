@@ -4,7 +4,7 @@ Reisplanner voor een gezinsvakantie op Mallorca, met de totale zonsverduistering
 van 12 augustus als hoogtepunt. Een enkele HTML-pagina, twee serverfuncties en
 een reisgids als PDF.
 
-**Versie 2026.08.03-5** — het versienummer staat onderaan in de app en in het
+**Versie 2026.08.03-8** — het versienummer staat onderaan in de app en in het
 instellingenscherm, zodat je kunt zien of wat online staat overeenkomt met deze
 broncode.
 
@@ -22,6 +22,9 @@ broncode.
 | `functions/api/delijn.js` | dezelfde functie, Cloudflare-vorm |
 | `functions/api/vlucht.js` | dezelfde functie, Cloudflare-vorm |
 | `Mallorca_Canyamel_10-19_augustus_2026.pdf` | de volledige reisgids |
+| `functions/api/…` | dezelfde functies, Cloudflare-vorm |
+| `worker.js` | toegangspoort voor Cloudflare Workers, zelfvoorzienend |
+| `wrangler.jsonc` | configuratie voor Cloudflare Workers |
 | `.env.example` | welke sleutels nodig zijn, zonder de waarden |
 
 Beide functiemappen mogen naast elkaar blijven staan. Netlify kijkt in
@@ -59,12 +62,33 @@ kunnen ook privérepositories lezen.
    `DELIJN_KEY` en `AVIATIONSTACK_KEY`.
 4. Na het instellen van variabelen: **Deploys** → **Trigger deploy**.
 
-## Cloudflare Pages koppelen aan GitHub
+## Cloudflare koppelen aan GitHub
 
-1. **Workers & Pages** → **Create** → **Pages** → **Connect to Git**, kies de repository.
-2. Framework preset: **None**. Build command: **leeg**. Build output directory: **`/`**
-3. **Settings** → **Variables and Secrets**: dezelfde twee sleutels.
-4. Opnieuw publiceren.
+Cloudflare maakt bij een Git-koppeling tegenwoordig een **Worker** aan, geen
+Pages-project. Daarom zitten `worker.js` en `wrangler.jsonc` in deze repository:
+zonder die twee weet de Worker niet dat hij de bestanden moet serveren, en zie
+je "No active routes".
+
+1. **Workers & Pages** → **Create** → **Import a repository**, kies de repository.
+2. Build command: **leeg**. Deploy command: **leeg**. Wrangler vindt de rest zelf.
+3. **Settings** → **Variables and Secrets**: `DELIJN_KEY` en `AVIATIONSTACK_KEY`,
+   allebei als **Secret** (versleuteld).
+4. **Settings** → **Domains & Routes**: zet het adres
+   `mallorca.JOUWNAAM.workers.dev` aan als dat nog niet gebeurd is.
+5. Opnieuw publiceren.
+
+`worker.js` bevat de code van beide functies volledig uitgeschreven, zonder
+imports. Wrangler bundelt vanuit de hoofdmap en kan bestanden uit de assets-map
+niet als module inladen; een import naar `functions/api/…` geeft daar
+`Could not resolve`. De bestanden in `functions/api/` blijven staan voor wie het
+klassieke Cloudflare Pages gebruikt.
+
+Let op: pas je een functie aan, pas ze dan op beide plekken aan.
+
+Het adres is dan `https://mallorca.JOUWNAAM.workers.dev`. Wil je liever het
+oude Pages-model met een `.pages.dev`-adres, kies dan bij het aanmaken
+uitdrukkelijk **Pages** in plaats van de Git-import; dan zijn `worker.js` en
+`wrangler.jsonc` overbodig maar ook onschadelijk.
 
 Vanaf dan publiceert elke `git push` op allebei tegelijk.
 
