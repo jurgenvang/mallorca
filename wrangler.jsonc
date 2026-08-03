@@ -1,0 +1,26 @@
+{
+  // Configuratie voor Cloudflare Workers.
+  // Nodig omdat Cloudflare bij een Git-koppeling een Worker aanmaakt en
+  // niet langer vanzelf een Pages-project. Zonder dit bestand weet de Worker
+  // niet dat hij je bestanden moet serveren.
+  //
+  // Netlify negeert dit bestand volledig.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mallorca",
+  "main": "worker.js",
+  "compatibility_date": "2026-06-01",
+
+  // De map met de bestanden die als website geserveerd worden.
+  "assets": {
+    "directory": "./",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application"
+  },
+
+  "observability": {
+    "enabled": true
+  }
+
+  // De sleutels DELIJN_KEY en AVIATIONSTACK_KEY zet je in het dashboard
+  // onder Settings, Variables and Secrets. Niet hier, en niet in Git.
+}
