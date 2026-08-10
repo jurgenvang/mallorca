@@ -212,7 +212,7 @@ footer a{color:var(--teal)}
   <footer>
     Weer via Open-Meteo &middot; treininfo via iRail &middot; tijden zijn richtlijnen<br>
     <a href="./Mallorca_Canyamel_10-19_augustus_2026.pdf" download>Volledige reisgids downloaden (PDF)</a><br>
-    <span style="opacity:.7">versie 2026.08.10-3</span>
+    <span style="opacity:.7">versie 2026.08.10-4</span>
   </footer>
 </div>
 
@@ -220,7 +220,7 @@ footer a{color:var(--teal)}
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
     <h2 id="sheetTitle">Instellingen</h2>
     <p class="lead">Bepaal waar het weer vandaan komt, wanneer de app voorstelt om dagen te ruilen, en of je live busgegevens wilt.
-       <br><b>Versie 2026.08.10-3</b> - vergelijk dit met de versie in je zip om te zien of het gepubliceerde bestand actueel is.</p>
+       <br><b>Versie 2026.08.10-4</b> - vergelijk dit met de versie in je zip om te zien of het gepubliceerde bestand actueel is.</p>
 
     <div class="field">
       <label for="locSel">Weerlocatie</label>
@@ -926,9 +926,10 @@ async function renderReistijd(){
   if(!host) return;
   const j=await reistijd();
   if(!j || j.fout){
+    const opCloudflare = functiePad==="/api/";
     const reden = j && j.fout==="geen sleutel"
       ? `Reistijd met verkeer staat uit: <b>TOMTOM_KEY</b> is nog niet ingesteld bij je host.
-         Zet hem bij Netlify onder Site configuration, Environment variables, en publiceer opnieuw.`
+         Zet hem ${opCloudflare?"bij Cloudflare onder Settings, Variables and Secrets":"bij Netlify onder Site configuration, Environment variables"}.`
       : j && j.fout
         ? `Reistijd niet opgehaald (${j.fout}).`
         : `Reistijd met verkeer is niet beschikbaar.`;

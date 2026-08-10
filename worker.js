@@ -95,19 +95,34 @@ async function vlucht(request, env, ctx) {
   if (!/^[A-Z]{2}\d{1,4}$/.test(nr))
     return bewaarEnGeef({ fout: 'ongeldig vluchtnummer' }, 400, kort);
 
-  const q = new URLSearchParams({ access_key: key, flight_iata: nr, limit: '3' });
-  if (/^\d{4}-\d{2}-\d{2}$/.test(datum)) q.set('flight_date', datum);
+  /* Het gratis tarief kent geen opvraging per datum: flight_date valt onder de
+     betalende toegang. We vragen dus eerst zonder datum - dat geeft de vlucht
+     van vandaag - en proberen mét datum alleen als dat niets oplevert. */
+  const bouwUrl = (metDatum) => {
+    const q = new URLSearchParams({ access_key: key, flight_iata: nr, limit: '3' });
+    if (metDatum && /^\d{4}-\d{2}-\d{2}$/.test(datum)) q.set('flight_date', datum);
+    /* Het gratis tarief werkt alleen over http. Vanaf de server is dat geen probleem. */
+    return 'http://api.aviationstack.com/v1/flights?' + q;
+  };
 
   try {
-    /* Het gratis tarief van Aviationstack werkt alleen over http.
-       Vanaf de server is dat geen probleem. */
-    const res = await fetch('http://api.aviationstack.com/v1/flights?' + q);
-    const j = await res.json();
+    let res = await fetch(bouwUrl(false));
+    let j = await res.json();
+
+    if ((!j || j.error || !(j.data && j.data.length)) && datum) {
+      const res2 = await fetch(bouwUrl(true));
+      const j2 = await res2.json();
+      if (j2 && !j2.error && j2.data && j2.data.length) j = j2;
+    }
 
     if (j && j.error) return bewaarEnGeef({
-      fout: j.error.message || 'Aviationstack gaf een fout',
-      uitleg: (j.error.code === 'usage_limit_reached')
-        ? 'Het gratis tarief is op voor deze maand.' : 'Controleer de sleutel.'
+      fout: j.error.message || j.error.type || j.error.code || 'Aviationstack gaf een fout',
+      code: j.error.code || j.error.type || null,
+      uitleg: (String(j.error.code).includes('usage_limit'))
+        ? 'Het maandbudget van het gratis tarief is op.'
+        : (String(j.error.code).includes('function_access') || String(j.error.code).includes('restricted'))
+          ? 'Deze opvraging valt buiten het gratis tarief.'
+          : 'Aviationstack weigert de aanvraag.'
     }, 502, kort);
 
     const v = (j && j.data && j.data[0]) || null;

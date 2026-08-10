@@ -5,7 +5,7 @@
    vangnet. Alleen als er geen verbinding is, komt de bewaarde versie terug.
    Zo zie je na een nieuwe publicatie meteen de laatste versie.                */
 
-const VERSIE = '2026.08.10-3';
+const VERSIE = '2026.08.10-4';
 const CACHE = 'canyamel-' + VERSIE;
 const CORE = ['./', './index.html', './Mallorca_Canyamel_10-19_augustus_2026.pdf',
               './Boodschappen_Canyamel.pdf'];

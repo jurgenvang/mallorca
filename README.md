@@ -4,7 +4,7 @@ Reisplanner voor een gezinsvakantie op Mallorca, met de totale zonsverduistering
 van 12 augustus als hoogtepunt. Een enkele HTML-pagina, twee serverfuncties en
 een reisgids als PDF.
 
-**Versie 2026.08.10-3** — het versienummer staat onderaan in de app en in het
+**Versie 2026.08.10-4** — het versienummer staat onderaan in de app en in het
 instellingenscherm, zodat je kunt zien of wat online staat overeenkomt met deze
 broncode.
 
