@@ -212,7 +212,7 @@ footer a{color:var(--teal)}
   <footer>
     Weer via Open-Meteo &middot; treininfo via iRail &middot; tijden zijn richtlijnen<br>
     <a href="./Mallorca_Canyamel_10-19_augustus_2026.pdf" download>Volledige reisgids downloaden (PDF)</a><br>
-    <span style="opacity:.7">versie 2026.08.10-4</span>
+    <span style="opacity:.7">versie 2026.08.10-5</span>
   </footer>
 </div>
 
@@ -220,7 +220,7 @@ footer a{color:var(--teal)}
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
     <h2 id="sheetTitle">Instellingen</h2>
     <p class="lead">Bepaal waar het weer vandaan komt, wanneer de app voorstelt om dagen te ruilen, en of je live busgegevens wilt.
-       <br><b>Versie 2026.08.10-4</b> - vergelijk dit met de versie in je zip om te zien of het gepubliceerde bestand actueel is.</p>
+       <br><b>Versie 2026.08.10-5</b> - vergelijk dit met de versie in je zip om te zien of het gepubliceerde bestand actueel is.</p>
 
     <div class="field">
       <label for="locSel">Weerlocatie</label>
@@ -290,8 +290,8 @@ footer a{color:var(--teal)}
       <div id="halteLijst" style="margin-top:8px"></div>
     </div>
     <div class="row">
-      <div class="field"><label for="dlLat">Breedtegraad vertrekadres</label><input type="number" id="dlLat" step="0.00001" value="50.87300"></div>
-      <div class="field"><label for="dlLon">Lengtegraad vertrekadres</label><input type="number" id="dlLon" step="0.00001" value="4.76200"></div>
+      <div class="field"><label for="dlLat">Breedtegraad vertrekadres</label><input type="number" id="dlLat" step="0.00001" value="50.87470"></div>
+      <div class="field"><label for="dlLon">Lengtegraad vertrekadres</label><input type="number" id="dlLon" step="0.00001" value="4.77930"></div>
     </div>
     <div class="row">
       <div class="field"><label for="dlEnt">Entiteitnummer</label><input type="number" id="dlEnt" placeholder="wordt ingevuld"></div>
@@ -341,7 +341,7 @@ const PLAATSEN = {
 };
 
 const DEFAULTS = {loc:"canyamel",lat:39.6567,lon:3.4407,unit:"celsius",
-  rain:55,heat:33,wind:35,autoAdv:true,showOpt:true,dlKey:"",dlEnt:"",dlHalte:"",dlProxy:false,dlLat:50.873,dlLon:4.762,deur:"",wifi:""};
+  rain:55,heat:33,wind:35,autoAdv:true,showOpt:true,dlKey:"",dlEnt:"",dlHalte:"",dlProxy:false,dlLat:50.8747,dlLon:4.7793,deur:"",wifi:""};
 let cfg = Object.assign({},DEFAULTS);
 let plan=null, wx=null, wxError=null, marine=null, eclipseCloud=null;
 let wxSets=null, wxNamen={thuisbasis:"Canyamel",arenal:"Aqualand",kijkplek:"de kijkplek"};
@@ -910,7 +910,7 @@ async function reistijd(){
   const bewaard=await get('mallorca:route');
   if(bewaard && Date.now()-bewaard.tijd < 10*60*1000) return bewaard.data;
   try{
-    const van=`${cfg.dlLat||50.873},${cfg.dlLon||4.762}`;
+    const van=`${cfg.dlLat||50.8747},${cfg.dlLon||4.7793}`;
     const r=await roepFunctie("route",
       `van=${van}&naar=${BRU.lat},${BRU.lon}&vertrek=${encodeURIComponent(VERTREKMOMENT)}`);
     if(!r) return null;
@@ -1035,11 +1035,15 @@ async function vluchtStatus(v, handmatig=false){
   }
 }
 
-function klok(iso,tz){
+/* Aviationstack geeft de lokale tijd van de luchthaven terug, met een offset
+   die niet altijd bij die plaats hoort. Omrekenen naar een tijdzone maakt het
+   dus fout: 18:55 werd 20:55. We lezen simpelweg het uur uit de tekst. */
+function klok(iso){
   if(!iso) return null;
+  const m=String(iso).match(/T(\d{2}):(\d{2})/);
+  if(m) return m[1]+":"+m[2];
   const d=new Date(iso);
-  if(isNaN(d)) return String(iso).slice(11,16)||null;
-  return d.toLocaleTimeString('nl-BE',{hour:'2-digit',minute:'2-digit',timeZone:tz});
+  return isNaN(d) ? null : d.toTimeString().slice(0,5);
 }
 const STATUSTEKST={scheduled:"volgens plan",active:"in de lucht",landed:"geland",
   cancelled:"geannuleerd",incident:"incident",diverted:"omgeleid",delayed:"vertraagd"};
@@ -1092,10 +1096,10 @@ async function renderVlucht(handmatig=false){
   const kleur = d.status==="cancelled" ? "lt" : vert>15 ? "lt" : "ok";
   const tekst = d.status==="cancelled" ? "geannuleerd" : vert>0 ? `+${vert} min` : st;
   const regels=[];
-  regels.push(`<div class="trainrow"><span class="t1">${klok(dep.verwacht,v.tz)||v.gepland}</span>
+  regels.push(`<div class="trainrow"><span class="t1">${klok(dep.verwacht)||v.gepland}</span>
     <span><b>vertrek</b> ${dep.iata||""} &middot; <span class="${kleur}">${tekst}</span>
     <span class="meta">${[dep.terminal?"terminal "+dep.terminal:"",dep.gate?"gate "+dep.gate:""].filter(Boolean).join(" &middot; ")||"gate nog niet bekend"}</span></span></div>`);
-  regels.push(`<div class="trainrow"><span class="t1">${klok(arr.verwacht,v.nr==="VY3651"?"Europe/Madrid":"Europe/Brussels")||v.aankomst}</span>
+  regels.push(`<div class="trainrow"><span class="t1">${klok(arr.verwacht)||v.aankomst}</span>
     <span><b>aankomst</b> ${arr.iata||""}
     <span class="meta">${[arr.terminal?"terminal "+arr.terminal:"",arr.band?"bagageband "+arr.band:""].filter(Boolean).join(" &middot; ")||""}</span></span></div>`);
   box.innerHTML=regels.join("");
@@ -1614,8 +1618,8 @@ function vulSheet(){
   document.getElementById('dlKey').value=cfg.dlKey||"";
   document.getElementById('dlEnt').value=cfg.dlEnt||"";
   document.getElementById('dlHalte').value=cfg.dlHalte||"";
-  document.getElementById('dlLat').value=cfg.dlLat||50.873;
-  document.getElementById('dlLon').value=cfg.dlLon||4.762;
+  document.getElementById('dlLat').value=cfg.dlLat||50.8747;
+  document.getElementById('dlLon').value=cfg.dlLon||4.7793;
   document.getElementById('halteLijst').innerHTML='';
   document.getElementById('deurIn').value=cfg.deur||"";
   document.getElementById('wifiIn').value=cfg.wifi||"";
@@ -1647,8 +1651,8 @@ document.getElementById('saveSheet').onclick=async()=>{
   cfg.dlKey=document.getElementById('dlKey').value.trim();
   cfg.dlEnt=document.getElementById('dlEnt').value.trim();
   cfg.dlHalte=document.getElementById('dlHalte').value.trim();
-  cfg.dlLat=parseFloat(document.getElementById('dlLat').value)||50.873;
-  cfg.dlLon=parseFloat(document.getElementById('dlLon').value)||4.762;
+  cfg.dlLat=parseFloat(document.getElementById('dlLat').value)||50.8747;
+  cfg.dlLon=parseFloat(document.getElementById('dlLon').value)||4.7793;
   cfg.deur=document.getElementById('deurIn').value.trim();
   cfg.wifi=document.getElementById('wifiIn').value.trim();
   await set('mallorca:cfg',cfg);
