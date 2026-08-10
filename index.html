@@ -212,7 +212,7 @@ footer a{color:var(--teal)}
   <footer>
     Weer via Open-Meteo &middot; treininfo via iRail &middot; tijden zijn richtlijnen<br>
     <a href="./Mallorca_Canyamel_10-19_augustus_2026.pdf" download>Volledige reisgids downloaden (PDF)</a><br>
-    <span style="opacity:.7">versie 2026.08.03-8</span>
+    <span style="opacity:.7">versie 2026.08.09-2</span>
   </footer>
 </div>
 
@@ -220,7 +220,7 @@ footer a{color:var(--teal)}
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
     <h2 id="sheetTitle">Instellingen</h2>
     <p class="lead">Bepaal waar het weer vandaan komt, wanneer de app voorstelt om dagen te ruilen, en of je live busgegevens wilt.
-       <br><b>Versie 2026.08.03-8</b> - vergelijk dit met de versie in je zip om te zien of het gepubliceerde bestand actueel is.</p>
+       <br><b>Versie 2026.08.09-2</b> - vergelijk dit met de versie in je zip om te zien of het gepubliceerde bestand actueel is.</p>
 
     <div class="field">
       <label for="locSel">Weerlocatie</label>
@@ -262,6 +262,18 @@ footer a{color:var(--teal)}
       <label for="autoAdv" style="margin:0;font-weight:400">Voorstellen tonen om de planning aan te passen</label></div>
     <div class="toggle"><input type="checkbox" id="showOpt">
       <label for="showOpt" style="margin:0;font-weight:400">Optionele uitstappen tonen als alternatief</label></div>
+
+    <hr class="sep">
+    <div class="field">
+      <label for="deurIn">Toegangscode buitendeur</label>
+      <input type="text" id="deurIn" placeholder="alleen op dit toestel bewaard" autocomplete="off">
+      <div class="hint">Deze site is voor iedereen bereikbaar. Wat je hier invult blijft in de opslag van
+        deze browser en komt niet in het bestand of op de server. Vul het op elk toestel apart in.</div>
+    </div>
+    <div class="field">
+      <label for="wifiIn">Wifi-wachtwoord</label>
+      <input type="text" id="wifiIn" placeholder="alleen op dit toestel bewaard" autocomplete="off">
+    </div>
 
     <hr class="sep">
     <div class="field">
@@ -329,7 +341,7 @@ const PLAATSEN = {
 };
 
 const DEFAULTS = {loc:"canyamel",lat:39.6567,lon:3.4407,unit:"celsius",
-  rain:55,heat:33,wind:35,autoAdv:true,showOpt:true,dlKey:"",dlEnt:"",dlHalte:"",dlProxy:false,dlLat:50.873,dlLon:4.762};
+  rain:55,heat:33,wind:35,autoAdv:true,showOpt:true,dlKey:"",dlEnt:"",dlHalte:"",dlProxy:false,dlLat:50.873,dlLon:4.762,deur:"",wifi:""};
 let cfg = Object.assign({},DEFAULTS);
 let plan=null, wx=null, wxError=null, marine=null, eclipseCloud=null;
 let wxSets=null, wxNamen={thuisbasis:"Canyamel",arenal:"Aqualand",kijkplek:"de kijkplek"};
@@ -350,24 +362,31 @@ function basePlan(){ return [
    {t:"18:55",x:"<b>Online inchecken opent</b> voor de heenvlucht",s:"24 uur voor vertrek. Meteen doen geeft de beste kans op vier stoelen naast elkaar.",u:"https://www.vueling.com/nl"},
    {t:"",x:"Bagage nameten",s:"40 x 30 x 20 cm is een rugzak, geen trolley. Een cabinekoffer van 55 x 40 x 20 past hier niet in en kost extra."},
    {t:"",x:"Ruimbagage geboekt?",s:"Vier personen, tien dagen, alleen rugzakken inbegrepen. Vooraf boeken kost vanaf 10 euro, aan de balie een veelvoud.",u:"https://www.vueling.com/nl"},
+   {t:"",x:"Formulier voor online inchecken van het appartement",s:"Joan stuurt dat zeven dagen voor aankomst per e-mail, dus rond 3 augustus. Invullen versnelt de aankomst.",u:"https://wa.me/34657750349"},
    {t:"",x:"Nog even Spaans oefenen",s:"Claro, La Tengo - de oefenapp bij Espanol FAST A1. Een kwartier per dag scheelt op de markt en in het restaurant.",u:"https://clarolatengo.jurgenvang.workers.dev/"}
  ]},
  {date:"2026-08-10",dag:"Ma 10 aug",titel:"Heenreis en aankomst",kind:["travel"],vast:true,items:[
-   {t:"15:35",x:"Halte voor de deur, richting Leuven",s:"Lijn 3. De halte voor de terugrit ligt 75 m verderop aan de overkant."},
-   {t:"15:45",x:"Bus lijn 3 naar Leuven station",s:"Ca. 20-25 min. Overdag op weekdagen twee bussen per uur.",u:"https://www.delijn.be/nl/routeplanner/"},
-   {t:"16:25",x:"Trein Leuven - Brussels Airport",s:"13 minuten, rechtstreeks, ongeveer twee per uur.",u:"https://www.belgiantrain.be/nl"},
-   {t:"16:40",x:"In de terminal",s:"Bagage afgeven, daarna security. Balies openen twee uur voor vertrek."},
+   {t:"15:45",x:"Klaarstaan met de bagage buiten"},
+   {t:"15:55",x:"<b>Uber naar Brussels Airport</b>",s:"Gereserveerd. Rijtijd 35 tot 40 minuten, afhankelijk van de ring."},
+   {t:"16:05",x:"<b>Beslismoment</b>",s:"Is de Uber er dan nog niet: neem de bus van 16:09. De halte ligt voor de deur, dus je haalt hem nog."},
+   {t:"16:09",x:"Terugval: bus lijn 3 naar Leuven station",s:"Uitstappen aan de achterkant van het station, dan de eerste trein naar Zaventem: 13 minuten, ongeveer twee per uur.",u:"https://www.delijn.be/nl/routeplanner/"},
+   {t:"16:35",x:"Aankomst luchthaven",s:"Met de Uber. Via bus en trein wordt het ongeveer 16:55 - ook dan ben je twee uur voor vertrek binnen."},
+   {t:"16:45",x:"Bagage afgeven, daarna security",s:"Balies openen twee uur voor vertrek."},
    {t:"18:55",x:"Vlucht VY 3651 naar Palma",s:"Aankomst 21:10. Daarna huurauto ophalen."},
-   {t:"22:15",x:"Rijden naar Canyamel",s:"Ca. 1 uur via de Ma-15. Neem water mee: 's nachts is alles dicht."}
+   {t:"21:10",x:"Landing Palma",s:"Het vluchtnummer staat bij de autoboeking, dus Record Go volgt jullie aankomst. Alleen bellen als er echt iets misloopt: +34 600 907 087.",u:"tel:+34600907087"},
+   {t:"21:45",x:"Auto ophalen",s:"Eerst het kantoor in de aankomsthal, dan het parkeergebouw tegenover de terminal, naar binnen en rechts. Fotos maken van velgen, ruit en dak voor je wegrijdt."},
+   {t:"22:15",x:"Rijden naar Canyamel",s:"Ca. 1 uur via de Ma-15. Neem water mee: 's nachts is alles dicht."},
+   {t:"23:15",x:"Aankomst: sleutels aan de receptie",s:"Ze liggen klaar met jullie naam, ook zo laat. Buitendeur openen met de code; die staat bij Info als je hem hebt ingevuld."}
  ]},
  {date:"2026-08-11",dag:"Di 11 aug",titel:"Acclimatiseren en markt van Arta",kind:["beach","outdoor"],wxbron:"arta",items:[
-   {t:"09:30",x:"Boodschappen bij Eroski of Bip Bip",s:"Beide op vijf minuten lopen."},
-   {t:"10:30",x:"Markt van Arta",s:"Elke dinsdag, kunstnijverheid. Ca. 15 min rijden."},
+   {t:"09:00",x:"<b>De grote inkoop bij Mercadona in Capdepera</b>",s:"12 min rijden. Zie de aparte boodschappenlijst, die is op deze planning afgestemd."},
+   {t:"10:30",x:"Markt van Arta",s:"Hier de groenten en het fruit: goedkoper en beter dan in de winkel. Neem cash mee."},
    {t:"15:00",x:"Strand van Canyamel",s:"Ondiep en rustig. Waterfiets of kajak ter plaatse, ca. 30 euro per uur."},
    {t:"",x:"Alternatief: fietsen huren in Cala Ratjada",s:"Kustlus naar Cala Agulla, ca. 25 km, weinig klim. Cristobal +34 609 12 24 55 of Schulz +34 619 41 06 51."},
-   {t:"19:00",x:"Diner bij Restaurante Isabel",s:"18:00-22:30, woensdag gesloten. Tel. +34 971 84 15 22."}
+   {t:"19:00",x:"<b>Eten in het appartement</b>",s:"Pasta met tomaat, tonijn en olijven, met een salade van tomaat, komkommer en ui. Sneller dan een restaurant, en iedereen is moe."}
  ]},
  {date:"2026-08-12",dag:"Wo 12 aug",titel:"Aqualand en de zonsverduistering",kind:["park","eclipse"],vast:true,wxbron:"arenal",items:[
+   {t:"07:45",x:"Pastasalade maken voor onderweg",s:"Scheelt het dure eten in het park en smaakt 's avonds bij de eclips nog altijd."},
    {t:"08:30",x:"Vertrek richting Aqualand S'Arenal",s:"Ca. 1u15 via Ma-15 en Ma-19."},
    {t:"10:00",x:"Aqualand opent",s:"Vier volwassentickets: 148 euro online. Vooraf kopen scheelt wachtrij.",u:"https://www.aqualand.es/elarenal/en/tickets"},
    {t:"18:00",x:"Park sluit, doorrijden naar de kijkplek"},
@@ -408,6 +427,7 @@ function basePlan(){ return [
    {t:"09:00",x:"Safari Mallorca in Sa Coma",s:"Opent 9:00. Safaritrein 30 min, daarna wandelgedeelte. Gratis parking.",u:"http://www.safarimallorca.es/"},
    {t:"13:00",x:"Lunch en middag in Cala Millor"},
    {t:"",x:"Alternatief voor de hele dag: Alcudia",s:"Wakepark aan de kabelbaan, eventueel met Hidropark ernaast. Ca. 1 uur rijden. Kitesurfen kan alleen daar: het oosten ligt in de luwte."},
+   {t:"20:30",x:"<b>Eten in het appartement</b>",s:"Pasta pesto met kip en rauwkost, in twintig minuten klaar."},
    {t:"17:00",x:"Fantasy Park",s:"Opent pas 16:30, tot middernacht. Voor 14 en 16 jaar vooral de karting.",u:"https://fantasyparkmallorca.com/"}
  ]},
  {date:"2026-08-18",dag:"Di 18 aug",titel:"Capdepera en vrije dag",kind:["outdoor"],wxbron:"capdepera",items:[
@@ -418,9 +438,12 @@ function basePlan(){ return [
    {t:"19:30",x:"Afscheidsdiner"}
  ]},
  {date:"2026-08-19",dag:"Wo 19 aug",titel:"Terugreis",kind:["travel"],vast:true,items:[
-   {t:"09:30",x:"Inpakken en appartement opleveren"},
-   {t:"11:15",x:"Vertrek richting Palma",s:"Ca. 1 uur. Onderweg tanken: de huurauto moet meestal vol terug."},
-   {t:"12:30",x:"Huurauto inleveren"},
+   {t:"08:30",x:"Inpakken, vegen, vaat in de vaatwasser",s:"Netjes achterlaten kost niets; erg vuil kost 50 euro."},
+   {t:"10:00",x:"<b>Uitchecken - dit is de uiterste tijd</b>",s:"Sleutels terug aan de receptie."},
+   {t:"10:15",x:"Ochtend vrij, bagage in de auto",s:"Nog een laatste strandwandeling, koffie in Capdepera of een duik. Je hebt ruim vier uur voor de vlucht."},
+   {t:"11:30",x:"Vertrek richting Palma",s:"Ca. 1 uur rijden."},
+   {t:"12:30",x:"Tanken binnen tien kilometer van de luchthaven",s:"En het kasticket bewaren. Zonder dat bewijs riskeer je tankkosten plus 30 euro toeslag."},
+   {t:"13:00",x:"Huurauto inleveren",s:"De boeking loopt tot 13:30. Rondom fotos maken bij het inleveren."},
    {t:"15:15",x:"Vlucht VY 3650 naar Brussel",s:"Landing 17:45."},
    {t:"19:00",x:"Trein naar Leuven, dan bus lijn 3",s:"Met twee ruimkoffers en vier personen is drie kwartier na de landing krap. Gaat het vlot, dan haal je de trein van 18:30. Halte 75 m verderop aan de overkant; na 20:00 nog een bus per uur."},
    {t:"20:00",x:"Thuis",s:"Reken op een uur later als de bagageband tegenzit."}
@@ -452,7 +475,9 @@ const PACK = [
   {id:"meten",t:"Handbagage nagemeten: 40 x 30 x 20 cm",w:"Moet onder de stoel passen. Een trolley haalt dit niet."},
   {id:"ehic",t:"Europese ziekteverzekeringskaart per persoon",w:"Gratis aan te vragen bij het ziekenfonds, duurt enkele dagen."},
   {id:"idkaart",t:"Vier identiteitskaarten, vervaldatum gecontroleerd",w:"Een verlopen kaart merk je pas aan de incheckbalie. Kijk nu na, vernieuwen duurt weken."},
-  {id:"rijbewijs",t:"Rijbewijs en creditcard van de hoofdbestuurder",w:"Verhuurders vragen bijna altijd een creditcard op naam."},
+  {id:"rijbewijs",t:"Rijbewijs en creditcard van de hoofdbestuurder",w:"Op papier, geen digitaal rijbewijs. De kaart moet 1.400 euro borg aankunnen; neobanken worden geweigerd."},
+  {id:"adresbewijs",t:"Bewijs van thuisadres voor de hoofdbestuurder",w:"Record Go vraagt dit. Een recente factuur of bankafschrift met adres. Wordt het vaakst vergeten."},
+  {id:"voucher",t:"Voucher van de huurauto en het vliegticket",w:"Aan een luchthavenbalie vragen ze een geldig ticket met datum en tijd."},
   {id:"gpx",t:"GPS-track van de wandeling offline opgeslagen",w:"Niet bewegwijzerd, en op de hoogte valt het netwerk weg."},
   {id:"pdf",t:"Deze reisgids offline op de telefoon",w:"PDF downloaden via de link onderaan."},
   {id:"spaans",t:"Spaans opfrissen",w:"Claro, La Tengo staat bij Info. Een kwartier per dag in de weken voor vertrek."}
@@ -478,6 +503,8 @@ const PACK = [
   {id:"rugzakje",t:"Dagrugzak"}
  ]},
  {groep:"Algemeen",items:[
+  {id:"uber",t:"Uber-app klaar op een telefoon met data",w:"Loopt het mis, dan zie je dat het snelst in de app. Om 16:05 zonder aarzelen naar de bushalte."},
+  {id:"treinticket",t:"Treintickets Leuven - Brussels Airport gekocht",w:"Ook als je met de Uber gaat. Scheelt aanschuiven op het moment dat je haast hebt."},
   {id:"lader",t:"Laders en een powerbank"},
   {id:"apotheek",t:"Kleine reisapotheek: pijnstiller, pleisters, iets tegen maagklachten"},
   {id:"muggen",t:"Muggenspray",w:"De wetlands achter het strand van Canyamel."},
@@ -489,11 +516,12 @@ const PACK = [
 /* ============ budget: 4 volwassenentarieven ============ */
 const GELD = {
  vast:[
-  {id:"vlucht",t:"Vluchten Vueling, 4 personen heen en terug",n:"Al geboekt, PNR GG3EJV",bedrag:null},
+  {id:"vlucht",t:"Vluchten Vueling, 4 personen heen en terug",n:"Al geboekt",bedrag:null},
   {id:"ruim",t:"Ruimbagage, 2 koffers heen en terug",n:"Vanaf 10 euro per koffer per richting, vooraf geboekt",bedrag:60},
   {id:"trein",t:"Trein Leuven - Brussels Airport, 4 personen heen en terug",n:"Ca. 12,50 per persoon per rit, luchthaventoeslag inbegrepen",bedrag:100},
   {id:"bus",t:"Bus lijn 3, 4 personen heen en terug",n:"Ca. 2,50 per rit",bedrag:20},
   {id:"huur",t:"Huurauto",n:"Geboekt",bedrag:212.07,aan:true},
+  {id:"ecotaks",t:"Toeristenbelasting",n:"Ca. 2 euro per persoon per nacht, 9 nachten, alleen 16-plussers",bedrag:58,aan:true},
   {id:"brandstof",t:"Brandstof",n:"Schatting: ca. 700 km over tien dagen, inclusief de rit naar Aqualand",bedrag:80,aan:true},
   {id:"verblijf",t:"Verblijf Canyamel, negen nachten",n:"Geboekt",bedrag:2448.22,aan:true}
  ],
@@ -520,6 +548,7 @@ const GELD = {
   {id:"sup",t:"Suptocht met gids",n:"Twee uur vanuit Cala Ratjada, 4 personen",bedrag:160,aan:false},
   {id:"wake",t:"Wakepark Alcudia",n:"Kabelbaan, familie-uur, ca. 1 uur rijden",bedrag:120,aan:false},
   {id:"jetski",t:"Jetskitocht met gids",n:"Cala Millor, 1 uur, 2 jetski's",bedrag:160,aan:false},
+  {id:"parkeren",t:"Binnen parkeren",n:"10 euro per nacht, vooraf te reserveren. Op straat is gratis",bedrag:90,aan:false},
   {id:"kite",t:"Kitesurfles",n:"Alleen in het noorden, ca. 1 uur rijden, per persoon",bedrag:120,aan:false},
   {id:"drach",t:"Coves del Drach",n:"4 x ca. 15 euro, tijdsloten",bedrag:60,aan:false},
   {id:"boot",t:"Boot- of snorkeltocht",n:"Vanaf ca. 40 euro per persoon",bedrag:160,aan:false},
@@ -552,9 +581,9 @@ const INFO_AUTO = [
 const INFO_REIS = [
  ["Adres verblijf","Via del Foner 49, 07589 Canyamel, Capdepera, Illes Balears"],
  ["Vertrekadres","Lostraat 32, 3212 Pellenberg"],
- ["Halte heenreis","Voor de deur, lijn 3 richting Leuven"],
+ ["Vertrek heenreis","Uber om 15:55, terugval bus 16:09 vanaf de halte voor de deur"],
  ["Halte terugreis","75 m verderop aan de overkant"],
- ["Boekingsreferentie","GG3EJV, Vueling, 4 passagiers, tarief Fly Light"],
+ ["Boekingsreferenties","op het privéblad, niet hier"],
  ["Heenvlucht","VY 3651, ma 10 aug, 18:55 Brussel - 21:10 Palma"],
  ["Terugvlucht","VY 3650, wo 19 aug, 15:15 Palma - 17:45 Brussel"],
  ["Inchecken heen","zo 9 aug vanaf 18:55"],
@@ -564,9 +593,9 @@ const INFO_REIS = [
 
 /* ============ agenda-items ============ */
 const EVENTS = [
- ["Online inchecken Vueling VY 3651 (heen)","20260809T185500","20260809T192500","Fly Light: inchecken opent 24u voor vertrek. PNR GG3EJV.","vueling.com"],
- ["Vertrek naar Brussels Airport","20260810T153500","20260810T164000","Bus lijn 3 vanaf de halte voor de deur, dan trein naar Brussels Airport.","Lostraat 32, 3212 Pellenberg"],
- ["Vlucht VY 3651 Brussel - Palma","20260810T185500","20260810T211000","PNR GG3EJV, 4 passagiers. Aankomst 21:10, daarna huurauto.","Brussels Airport"],
+ ["Online inchecken Vueling VY 3651 (heen)","20260809T185500","20260809T192500","Fly Light: inchecken opent 24u voor vertrek.","vueling.com"],
+ ["Uber naar Brussels Airport","20260810T155500","20260810T163500","Gereserveerd. Om 16:05 beslissen: geen wagen, dan de bus van 16:09 naar Leuven station achterkant en de trein.","Lostraat 32, 3212 Pellenberg"],
+ ["Vlucht VY 3651 Brussel - Palma","20260810T185500","20260810T211000","4 passagiers. Aankomst 21:10, daarna huurauto.","Brussels Airport"],
  ["Markt van Arta","20260811T103000","20260811T130000","Dinsdagmarkt met kunstnijverheid, tot ca. 13:00.","Arta, Mallorca"],
  ["Aqualand S'Arenal","20260812T100000","20260812T180000","Tickets vooraf online. 4 volwassentarieven: 148 euro.","Aqualand El Arenal"],
  ["TOTALE ZONSVERDUISTERING - totaliteit 20:31","20260812T193000","20260812T210000","Far de Cap Blanc of Cap de ses Salines. Eclipsbrillen ISO 12312-2.","Far de Cap Blanc, Llucmajor"],
@@ -579,7 +608,7 @@ const EVENTS = [
  ["Safari Mallorca","20260817T090000","20260817T130000","Safaritrein 30 min plus wandelgedeelte. Gratis parking.","Sa Coma"],
  ["Fantasy Park","20260817T170000","20260817T200000","Opent 16:30, tot middernacht. Karting.","Cala Millor"],
  ["Castell de Capdepera","20260818T100000","20260818T110000","Ca. 4 euro per persoon. Parking op 15 min lopen.","Capdepera"],
- ["Online inchecken Vueling VY 3650 (terug)","20260818T151500","20260818T154500","PNR GG3EJV. Boardingpasses downloaden.","vueling.com"],
+ ["Online inchecken Vueling VY 3650 (terug)","20260818T151500","20260818T154500","Boardingpasses downloaden.","vueling.com"],
  ["Vertrek Canyamel - auto inleveren","20260819T111500","20260819T131500","Ca. 1 uur rijden, onderweg tanken.","Via del Foner 49, Canyamel"],
  ["Vlucht VY 3650 Palma - Brussel","20260819T151500","20260819T174500","Landing 17:45. Daarna trein en bus lijn 3.","Aeroport de Palma"]
 ];
@@ -760,11 +789,19 @@ async function renderReis(){
   const host=document.getElementById('reisPanel');
   const vandaag=new Date().toISOString().slice(0,10);
   let datum=null,from=null,to=null,tijd=null,label=null;
-  if(vandaag<="2026-08-10"){ datum="2026-08-10"; from="leuven"; to="zaventem"; tijd="1600"; label="Leuven naar Brussels Airport, maandag 10 augustus"; }
+  if(vandaag<="2026-08-10"){ datum="2026-08-10"; from="leuven"; to="zaventem"; tijd="1630"; label="Leuven naar Brussels Airport, maandag 10 augustus - de terugval als de Uber niet komt"; }
   else if(vandaag<="2026-08-19"){ datum="2026-08-19"; from="zaventem"; to="leuven"; tijd="1900"; label="Brussels Airport naar Leuven, woensdag 19 augustus, vanaf 19:00"; }
   if(!datum){ host.innerHTML=""; return; }
 
-  host.innerHTML=`<div class="panel"><h2>Treinen</h2>
+  const naarLuchthaven = vandaag<="2026-08-10" ? `<div class="panel"><h2>Naar de luchthaven</h2>
+    <p class="lead">Vanaf Lostraat 32. De Uber vertrekt om 15:55; om 16:05 is het beslismoment.</p>
+    <div class="trainbox" id="reistijdBox">Reistijd ophalen&hellip;</div>
+    <div class="advice-actions" style="margin-top:12px">
+      <a class="act" href="${mapsLink('driving')}" target="_blank" rel="noopener">Route met de wagen</a>
+      <a class="act" href="${mapsLink('transit')}" target="_blank" rel="noopener">Route met bus en trein</a>
+    </div></div>` : "";
+
+  host.innerHTML=naarLuchthaven + `<div class="panel"><h2>Treinen</h2>
     <p class="lead">${label}. Live gegevens van NMBS: vertraging, perron en afgelastingen.</p>
     <div class="trainbox" id="trainbox">Verbindingen ophalen&hellip;</div>
     <h3>Bus lijn 3</h3>
@@ -774,6 +811,8 @@ async function renderReis(){
       <a class="act" href="https://www.belgiantrain.be/nl" target="_blank" rel="noopener">Tickets kopen</a>
       <a class="act" href="https://www.delijn.be/nl/routeplanner/" target="_blank" rel="noopener">Busuren lijn 3</a>
     </div></div>`;
+
+  renderReistijd();
 
   busDoorkomsten().then(dk=>{
     const b=document.getElementById('busbox'); if(!b) return;
@@ -844,6 +883,53 @@ async function roepFunctie(naam, params){
     }catch(e){}
   }
   return null;
+}
+
+/* ============ reistijd naar de luchthaven ============ */
+const BRU = {lat:50.9014, lon:4.4844, naam:"Brussels Airport"};
+const VERTREKMOMENT = "2026-08-10T15:55:00+02:00";
+
+function mapsLink(modus){
+  const van = `${cfg.dlLat||50.873},${cfg.dlLon||4.762}`;
+  const naar = `${BRU.lat},${BRU.lon}`;
+  return `https://www.google.com/maps/dir/?api=1&origin=${van}&destination=${naar}&travelmode=${modus}`;
+}
+
+async function reistijd(){
+  const vandaag=new Date().toISOString().slice(0,10);
+  if(vandaag>"2026-08-10") return null;            /* na de heenreis niet meer nodig */
+  const bewaard=await get('mallorca:route');
+  if(bewaard && Date.now()-bewaard.tijd < 10*60*1000) return bewaard.data;
+  try{
+    const van=`${cfg.dlLat||50.873},${cfg.dlLon||4.762}`;
+    const r=await roepFunctie("route",
+      `van=${van}&naar=${BRU.lat},${BRU.lon}&vertrek=${encodeURIComponent(VERTREKMOMENT)}`);
+    if(!r) return null;
+    const j=await r.json().catch(()=>null);
+    if(!r.ok || !j || j.fout) return null;
+    await set('mallorca:route',{tijd:Date.now(), data:j});
+    return j;
+  }catch(e){ return null; }
+}
+
+async function renderReistijd(){
+  const host=document.getElementById('reistijdBox');
+  if(!host) return;
+  const j=await reistijd();
+  if(!j){
+    host.innerHTML=`<p class="lead" style="margin:0">Reken op ongeveer veertig minuten met de wagen.
+      Open de route hierboven voor de actuele tijd.</p>`;
+    return;
+  }
+  const laat = j.vertragingMinuten>=10;
+  const aankomst = j.aankomst ? new Date(j.aankomst).toLocaleTimeString('nl-BE',
+      {hour:'2-digit',minute:'2-digit',timeZone:'Europe/Brussels'}) : null;
+  host.innerHTML=`<div class="trainrow"><span class="t1">${j.minuten}'</span>
+    <span><b>naar Brussels Airport</b>, ${j.kilometer} km
+    ${laat?`<span class="lt">+${j.vertragingMinuten} min door verkeer</span>`
+          :`<span class="ok">vlot</span>`}
+    <span class="meta">${aankomst?`bij vertrek om 15:55 ben je er rond ${aankomst}`:''}
+    ${j.minutenZonderVerkeer?` &middot; zonder verkeer ${j.minutenZonderVerkeer} min`:''}</span></span></div>`;
 }
 
 /* ============ vlucht ============ */
@@ -1365,6 +1451,39 @@ function renderInfo(){
   <div class="panel"><h2>Rijden in Spanje</h2>
     <ul style="margin:0;padding-left:18px;font-size:14px">${INFO_AUTO.map(t=>`<li style="margin-bottom:7px">${t}</li>`).join("")}</ul>
   </div>
+  <div class="panel"><h2>Het appartement</h2>
+    <table class="rows"><tbody>
+      <tr><td style="color:var(--grey);width:42%">Contactpersoon</td>
+          <td><b>Joan</b> &middot; <a href="https://wa.me/34657750349" target="_blank" rel="noopener">WhatsApp +34 657 750 349</a>
+          <span class="why" style="color:var(--grey);font-size:12.5px">Liefst via WhatsApp. Niet bellen na 21:00 tenzij het dringend is.</span></td></tr>
+      <tr><td style="color:var(--grey)">Buitendeur</td><td>${cfg.deur
+          ? `<b style="font-size:19px;letter-spacing:.08em">${cfg.deur}</b>`
+          : `<span style="color:var(--rust)">nog niet ingevuld</span>
+             <span class="why" style="color:var(--grey);font-size:12.5px">Vul hem in bij de instellingen, dan blijft hij op dit toestel.</span>`}</td></tr>
+      <tr><td style="color:var(--grey)">Wifi</td><td>${cfg.wifi
+          ? `<b style="letter-spacing:.06em">${cfg.wifi}</b>`
+          : `<span style="color:var(--grey)">in te vullen bij de instellingen</span>`}</td></tr>
+      <tr><td style="color:var(--grey)">Sleutels</td><td><b>Aan de receptie</b>
+          <span class="why" style="color:var(--grey);font-size:12.5px">Ook bij late aankomst: ze liggen klaar met jullie naam en de weg naar het appartement.</span></td></tr>
+      <tr><td style="color:var(--grey)">Inchecken vanaf</td><td><b>16:00</b> &middot; later aankomen is geen probleem</td></tr>
+      <tr><td style="color:var(--grey)">Uitchecken uiterlijk</td><td><b>10:00</b> op woensdag 19 augustus</td></tr>
+      <tr><td style="color:var(--grey)">Online inchecken</td><td>Formulier per e-mail, zeven dagen voor aankomst.
+          <span class="why" style="color:var(--grey);font-size:12.5px">Dat is rond 3 augustus. Invullen versnelt de aankomst.</span></td></tr>
+      <tr><td style="color:var(--grey)">Toeristenbelasting</td><td>Ter plaatse te betalen bij aankomst
+          <span class="why" style="color:var(--grey);font-size:12.5px">Ongeveer 2 euro per persoon per nacht voor 16-plussers. Onder 16 vrijgesteld, dus voor drie van jullie: reken op 55 tot 60 euro.</span></td></tr>
+      <tr><td style="color:var(--grey)">Parkeren</td><td><b>Op straat gratis</b>
+          <span class="why" style="color:var(--grey);font-size:12.5px">Binnen kost 10 euro per nacht en moet vooraf gereserveerd, afhankelijk van beschikbaarheid. Negen nachten binnen is 90 euro.</span></td></tr>
+    </tbody></table>
+  </div>
+  <div class="panel"><h2>Huisregels</h2>
+    <ul style="margin:0;padding-left:18px;font-size:14px">
+      <li style="margin-bottom:7px">Er wordt <b>niet schoongemaakt tijdens het verblijf</b>, ongeacht hoe lang je blijft. Het appartement is bij aankomst schoon en volledig uitgerust: keukengerei, bedlinnen, handdoeken en schoonmaakspullen.</li>
+      <li style="margin-bottom:7px">Bij vertrek geveegd achterlaten en de vaat schoon of in de vaatwasser. Dan wordt er niets aangerekend.</li>
+      <li style="margin-bottom:7px">Erg vuil of beschadigd achterlaten: <b>50 euro extra</b> plus de schade.</li>
+      <li style="margin-bottom:7px"><b>Roken binnen is verboden</b> - 200 euro.</li>
+      <li>Canyamel is een rustige plek zonder discotheken. Feesten of nachtlawaai worden niet getolereerd.</li>
+    </ul>
+  </div>
   <div class="panel"><h2>Reisgegevens</h2>
     <table class="rows"><tbody>${INFO_REIS.map(r=>`<tr><td style="color:var(--grey);width:38%">${r[0]}</td>
       <td><b>${r[1]}</b></td></tr>`).join("")}</tbody></table>
@@ -1373,6 +1492,32 @@ function renderInfo(){
     <p class="lead">Aan een taxichauffeur of als je de weg kwijt bent:</p>
     <p style="font-size:16px;font-family:'Fraunces',Georgia,serif;background:var(--sand);padding:12px;border-radius:10px;margin:0">
       Voy a Via del Foner 49, Canyamel, Capdepera.</p>
+  </div>
+  <div class="panel"><h2>De huurauto</h2>
+    <p class="lead">Record Go, in de terminal van Palma. Ophalen ma 10 aug om 21:30, inleveren wo 19 aug
+      om 13:30. Boekingsnummer staat op het privéblad.</p>
+    <table class="rows"><tbody>
+      <tr><td style="color:var(--grey);width:38%">Telefoon</td>
+          <td><a href="tel:+34600907087"><b>+34 600 907 087</b></a>
+          <span class="why">Het vluchtnummer is doorgegeven, dus ze volgen je aankomst. Alleen bellen bij echte problemen.</span></td></tr>
+      <tr><td style="color:var(--grey)">Borg</td><td><b>1.400 euro</b> op de creditcard van de hoofdbestuurder
+          <span class="why">Pincode nodig. Neobanken en prepaidkaarten worden geweigerd.</span></td></tr>
+      <tr><td style="color:var(--grey)">Eigen risico</td><td>1.400 euro
+          <span class="why">Alleen carrosserie gedekt. Glas, wielen, interieur, dak en sleutels niet.</span></td></tr>
+      <tr><td style="color:var(--grey)">Meenemen</td><td>Rijbewijs, paspoort, voucher, vliegticket
+          <span class="why">En een bewijs van je thuisadres voor de hoofdbestuurder - dat wordt het vaakst vergeten.</span></td></tr>
+      <tr><td style="color:var(--grey)">Brandstof</td><td>Gelijk niveau terug
+          <span class="why">Tank binnen tien kilometer van de luchthaven en bewaar het kasticket, anders 30 euro toeslag.</span></td></tr>
+      <tr><td style="color:var(--grey)">Bij schade</td><td>Record Go bellen <b>en</b> politieaangifte
+          <span class="why">Zonder politiedocument ben je aansprakelijk voor de volledige waarde.</span></td></tr>
+    </tbody></table>
+  </div>
+  <div class="panel"><h2>Als de huurauto wegvalt</h2>
+    <p class="lead">Joan kan een taxi van of naar de luchthaven regelen. Voor vier personen:
+      <b>100 euro</b>, of <b>110 euro</b> op feestdagen en 's nachts. Jullie heenvlucht landt om 21:10,
+      dus dat telt als nachttarief.</p>
+    <p class="lead" style="margin:0">Een shuttlebus is goedkoper; die boek je online bij een aanbieder als
+      <a href="https://www.hoppa.com/" target="_blank" rel="noopener">hoppa.com</a>.</p>
   </div>
   <div class="panel"><h2>Spaans oefenen</h2>
     <p class="lead">Een kwartier per dag voor vertrek scheelt op de markt, in het restaurant en aan de
@@ -1395,6 +1540,7 @@ function renderInfo(){
   <div class="panel"><h2>Documenten</h2>
     <div class="advice-actions">
       <a class="act" href="./Mallorca_Canyamel_10-19_augustus_2026.pdf" download>Reisgids als PDF</a>
+      <a class="act" href="./Boodschappen_Canyamel.pdf" download>Boodschappenlijst</a>
       <button class="act" id="icsBtn2">Agendabestand</button>
     </div>
     <p class="lead" style="margin-top:10px">Download de PDF een keer als je nog verbinding hebt; daarna blijft
@@ -1451,6 +1597,8 @@ function vulSheet(){
   document.getElementById('dlLat').value=cfg.dlLat||50.873;
   document.getElementById('dlLon').value=cfg.dlLon||4.762;
   document.getElementById('halteLijst').innerHTML='';
+  document.getElementById('deurIn').value=cfg.deur||"";
+  document.getElementById('wifiIn').value=cfg.wifi||"";
   document.getElementById('customCoords').style.display=cfg.loc==="custom"?"flex":"none";
   const s=document.getElementById('dlStatus'); s.className='status'; s.textContent='';
 }
@@ -1481,8 +1629,11 @@ document.getElementById('saveSheet').onclick=async()=>{
   cfg.dlHalte=document.getElementById('dlHalte').value.trim();
   cfg.dlLat=parseFloat(document.getElementById('dlLat').value)||50.873;
   cfg.dlLon=parseFloat(document.getElementById('dlLon').value)||4.762;
+  cfg.deur=document.getElementById('deurIn').value.trim();
+  cfg.wifi=document.getElementById('wifiIn').value.trim();
   await set('mallorca:cfg',cfg);
   bg.classList.remove('open');
+  if(tab==='info') renderInfo();
   await Promise.all([loadWeather(),loadNu()]); await loadMarine(); await loadEclipseSky();
   renderPlan();
 };

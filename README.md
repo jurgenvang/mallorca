@@ -4,7 +4,7 @@ Reisplanner voor een gezinsvakantie op Mallorca, met de totale zonsverduistering
 van 12 augustus als hoogtepunt. Een enkele HTML-pagina, twee serverfuncties en
 een reisgids als PDF.
 
-**Versie 2026.08.03-8** — het versienummer staat onderaan in de app en in het
+**Versie 2026.08.09-2** — het versienummer staat onderaan in de app en in het
 instellingenscherm, zodat je kunt zien of wat online staat overeenkomt met deze
 broncode.
 
@@ -19,8 +19,10 @@ broncode.
 | `netlify.toml` | configuratie voor Netlify |
 | `netlify/functions/delijn.js` | busgegevens, Netlify-vorm |
 | `netlify/functions/vlucht.js` | vluchtstatus, Netlify-vorm |
+| `netlify/functions/route.js` | reistijd met verkeer, Netlify-vorm |
 | `functions/api/delijn.js` | dezelfde functie, Cloudflare-vorm |
 | `functions/api/vlucht.js` | dezelfde functie, Cloudflare-vorm |
+| `functions/api/route.js` | reistijd met verkeer, Cloudflare-vorm |
 | `Mallorca_Canyamel_10-19_augustus_2026.pdf` | de volledige reisgids |
 | `functions/api/…` | dezelfde functies, Cloudflare-vorm |
 | `worker.js` | toegangspoort voor Cloudflare Workers, zelfvoorzienend |
@@ -59,7 +61,7 @@ kunnen ook privérepositories lezen.
 2. Build command: **leeg laten**. Publish directory: **`.`**
    (`netlify.toml` zet dit al goed, dus meestal hoef je niets in te vullen.)
 3. **Site configuration** → **Environment variables**:
-   `DELIJN_KEY` en `AVIATIONSTACK_KEY`.
+   `DELIJN_KEY`, `AVIATIONSTACK_KEY` en `TOMTOM_KEY`.
 4. Na het instellen van variabelen: **Deploys** → **Trigger deploy**.
 
 ## Cloudflare koppelen aan GitHub
@@ -143,6 +145,7 @@ tweemaal in: een keer bij Netlify, een keer bij Cloudflare.
 | `/.netlify/functions/delijn?mode=entiteiten` | lijst met gegevens |
 | `/api/delijn?mode=entiteiten` | idem, op Cloudflare |
 | `/.netlify/functions/vlucht?nr=VY3651&datum=2026-08-10` | vluchtgegevens |
+| `/.netlify/functions/route?van=50.873,4.762&naar=50.9014,4.4844` | reistijd met verkeer |
 
 - `"fout": "geen sleutel"` → de variabele ontbreekt, of er is niet opnieuw gepubliceerd
 - `"geen gegevens"` bij de vlucht → normaal zolang de vlucht nog ver weg is

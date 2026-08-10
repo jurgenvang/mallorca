@@ -145,6 +145,46 @@ async function vlucht(request, env, ctx) {
   }
 }
 
+/* ---------------- reistijd met verkeer ---------------- */
+async function route(request, env) {
+  const kop = { 'Cache-Control': 'public, max-age=120, s-maxage=300' };
+  const kort = { 'Cache-Control': 'public, max-age=0, s-maxage=30' };
+
+  const key = env.TOMTOM_KEY;
+  if (!key) return json({
+    fout: 'geen sleutel',
+    uitleg: 'Zet TOMTOM_KEY bij Settings, Variables and Secrets.'
+  }, 500, kort);
+
+  const p = new URL(request.url).searchParams;
+  const punt = /^-?\d{1,3}\.\d+,-?\d{1,3}\.\d+$/;
+  const van = (p.get('van') || '').trim();
+  const naar = (p.get('naar') || '').trim();
+  if (!punt.test(van) || !punt.test(naar)) return json({ fout: 'ongeldige coordinaten' }, 400, kort);
+
+  const q = new URLSearchParams({ key, traffic: 'true', computeTravelTimeFor: 'all', routeType: 'fastest' });
+  const vertrek = p.get('vertrek');
+  if (vertrek && /^\d{4}-\d{2}-\d{2}T/.test(vertrek)) q.set('departAt', vertrek);
+
+  try {
+    const res = await fetch(`https://api.tomtom.com/routing/1/calculateRoute/${van}:${naar}/json?${q}`);
+    if (!res.ok) return json({ fout: 'TomTom antwoordde met status ' + res.status }, res.status, kort);
+    const j = await res.json();
+    const r = j && j.routes && j.routes[0] && j.routes[0].summary;
+    if (!r) return json({ fout: 'geen route gevonden' }, 404, kort);
+    return json({
+      minuten: Math.round(r.travelTimeInSeconds / 60),
+      minutenZonderVerkeer: r.noTrafficTravelTimeInSeconds
+        ? Math.round(r.noTrafficTravelTimeInSeconds / 60) : null,
+      vertragingMinuten: r.trafficDelayInSeconds ? Math.round(r.trafficDelayInSeconds / 60) : 0,
+      kilometer: Math.round(r.lengthInMeters / 100) / 10,
+      aankomst: r.arrivalTime || null
+    }, 200, kop);
+  } catch (e) {
+    return json({ fout: 'TomTom niet bereikbaar' }, 502, kort);
+  }
+}
+
 /* ---------------- toegangspoort ---------------- */
 export default {
   async fetch(request, env, ctx) {
@@ -153,6 +193,7 @@ export default {
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS });
     if (url.pathname === '/api/delijn') return delijn(request, env);
     if (url.pathname === '/api/vlucht') return vlucht(request, env, ctx);
+    if (url.pathname === '/api/route') return route(request, env);
 
     /* Alles wat geen functie is, komt uit de bestanden. */
     return env.ASSETS.fetch(request);

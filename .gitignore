@@ -1,3 +1,7 @@
+# toegangscodes en wifi horen niet op een publieke site
+Verblijfsgegevens_NIET_PUBLICEREN.pdf
+*NIET_PUBLICEREN*
+
 # omgevingsvariabelen horen bij de host, nooit in de repository
 .env
 .env.*
