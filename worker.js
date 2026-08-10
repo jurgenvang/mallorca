@@ -191,6 +191,13 @@ export default {
     const url = new URL(request.url);
 
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS });
+
+    /* Netlify-adressen bestaan hier niet. Zonder deze regel zou de instelling
+       voor eenpagina-apps er index.html op teruggeven met status 200, en dan
+       denkt de app ten onrechte dat de functie bestaat. */
+    if (url.pathname.startsWith('/.netlify/')) {
+      return json({ fout: 'niet hier', uitleg: 'Op Cloudflare gebruik je /api/...' }, 404, {});
+    }
     if (url.pathname === '/api/delijn') return delijn(request, env);
     if (url.pathname === '/api/vlucht') return vlucht(request, env, ctx);
     if (url.pathname === '/api/route') return route(request, env);

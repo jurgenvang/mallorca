@@ -212,7 +212,7 @@ footer a{color:var(--teal)}
   <footer>
     Weer via Open-Meteo &middot; treininfo via iRail &middot; tijden zijn richtlijnen<br>
     <a href="./Mallorca_Canyamel_10-19_augustus_2026.pdf" download>Volledige reisgids downloaden (PDF)</a><br>
-    <span style="opacity:.7">versie 2026.08.09-2</span>
+    <span style="opacity:.7">versie 2026.08.10-3</span>
   </footer>
 </div>
 
@@ -220,7 +220,7 @@ footer a{color:var(--teal)}
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
     <h2 id="sheetTitle">Instellingen</h2>
     <p class="lead">Bepaal waar het weer vandaan komt, wanneer de app voorstelt om dagen te ruilen, en of je live busgegevens wilt.
-       <br><b>Versie 2026.08.09-2</b> - vergelijk dit met de versie in je zip om te zien of het gepubliceerde bestand actueel is.</p>
+       <br><b>Versie 2026.08.10-3</b> - vergelijk dit met de versie in je zip om te zien of het gepubliceerde bestand actueel is.</p>
 
     <div class="field">
       <label for="locSel">Weerlocatie</label>
@@ -799,14 +799,16 @@ async function renderReis(){
     <div class="advice-actions" style="margin-top:12px">
       <a class="act" href="${mapsLink('driving')}" target="_blank" rel="noopener">Route met de wagen</a>
       <a class="act" href="${mapsLink('transit')}" target="_blank" rel="noopener">Route met bus en trein</a>
+      <a class="act" href="https://wa.me/" style="display:none"></a>
     </div></div>` : "";
 
-  host.innerHTML=naarLuchthaven + `<div class="panel"><h2>Treinen</h2>
+  host.innerHTML=naarLuchthaven + `<div class="panel"><h2>Bus en trein</h2>
     <p class="lead">${label}. Live gegevens van NMBS: vertraging, perron en afgelastingen.</p>
-    <div class="trainbox" id="trainbox">Verbindingen ophalen&hellip;</div>
-    <h3>Bus lijn 3</h3>
+    <h3 style="margin-top:0">Eerst de bus - lijn 3</h3>
     <p class="lead" style="margin-bottom:6px">Heen: halte voor de deur. Terug: 75 m verderop aan de overkant.</p>
     <div class="trainbox" id="busbox">Doorkomsten ophalen&hellip;</div>
+    <h3>Dan de trein</h3>
+    <div class="trainbox" id="trainbox">Verbindingen ophalen&hellip;</div>
     <div class="advice-actions" style="margin-top:12px">
       <a class="act" href="https://www.belgiantrain.be/nl" target="_blank" rel="noopener">Tickets kopen</a>
       <a class="act" href="https://www.delijn.be/nl/routeplanner/" target="_blank" rel="noopener">Busuren lijn 3</a>
@@ -878,10 +880,15 @@ async function roepFunctie(naam, params){
     try{
       const r=await fetch(pad+naam+(params?"?"+params:""));
       if(r.status===404) continue;
+      /* Krijgen we een pagina in plaats van gegevens terug, dan bestaat de
+         functie op dit adres niet echt - dan het volgende adres proberen. */
+      const soort=(r.headers && r.headers.get) ? (r.headers.get('content-type')||"") : "";
+      if(soort && !soort.includes('json')) continue;
       functiePad=pad;
       return r;
     }catch(e){}
   }
+  functiePad=null;
   return null;
 }
 
@@ -889,9 +896,11 @@ async function roepFunctie(naam, params){
 const BRU = {lat:50.9014, lon:4.4844, naam:"Brussels Airport"};
 const VERTREKMOMENT = "2026-08-10T15:55:00+02:00";
 
+const THUIS_ADRES = "Lostraat 32, 3212 Pellenberg";
+const LUCHTHAVEN_ADRES = "Brussels Airport Departures, Zaventem";
 function mapsLink(modus){
-  const van = `${cfg.dlLat||50.873},${cfg.dlLon||4.762}`;
-  const naar = `${BRU.lat},${BRU.lon}`;
+  const van = encodeURIComponent(THUIS_ADRES);
+  const naar = encodeURIComponent(LUCHTHAVEN_ADRES);
   return `https://www.google.com/maps/dir/?api=1&origin=${van}&destination=${naar}&travelmode=${modus}`;
 }
 
@@ -906,19 +915,26 @@ async function reistijd(){
       `van=${van}&naar=${BRU.lat},${BRU.lon}&vertrek=${encodeURIComponent(VERTREKMOMENT)}`);
     if(!r) return null;
     const j=await r.json().catch(()=>null);
-    if(!r.ok || !j || j.fout) return null;
+    if(!r.ok || !j || j.fout) return {fout:(j&&j.fout)||("fout "+r.status), uitleg:(j&&j.uitleg)||""};
     await set('mallorca:route',{tijd:Date.now(), data:j});
     return j;
-  }catch(e){ return null; }
+  }catch(e){ return {fout:"functie niet bereikbaar"}; }
 }
 
 async function renderReistijd(){
   const host=document.getElementById('reistijdBox');
   if(!host) return;
   const j=await reistijd();
-  if(!j){
-    host.innerHTML=`<p class="lead" style="margin:0">Reken op ongeveer veertig minuten met de wagen.
-      Open de route hierboven voor de actuele tijd.</p>`;
+  if(!j || j.fout){
+    const reden = j && j.fout==="geen sleutel"
+      ? `Reistijd met verkeer staat uit: <b>TOMTOM_KEY</b> is nog niet ingesteld bij je host.
+         Zet hem bij Netlify onder Site configuration, Environment variables, en publiceer opnieuw.`
+      : j && j.fout
+        ? `Reistijd niet opgehaald (${j.fout}).`
+        : `Reistijd met verkeer is niet beschikbaar.`;
+    host.innerHTML=`<p class="lead" style="margin:0">${reden}<br>
+      Reken ondertussen op ongeveer veertig minuten met de wagen; de kaartlinks hieronder geven de
+      actuele tijd.</p>`;
     return;
   }
   const laat = j.vertragingMinuten>=10;
@@ -936,10 +952,12 @@ async function renderReistijd(){
 const VLUCHTEN = {
   heen:{nr:"VY3651",datum:"2026-08-10",van:"Brussel Zaventem",naar:"Palma de Mallorca",
         gepland:"18:55",aankomst:"21:10",tz:"Europe/Brussels",
-        bord:"https://www.brusselsairport.be/nl/vluchten/vertrek"},
+        tracker:"https://www.flightradar24.com/data/airports/BRU",
+        bord:"https://www.brusselsairport.be/en/passenger/flights/departing"},
   terug:{nr:"VY3650",datum:"2026-08-19",van:"Palma de Mallorca",naar:"Brussel Zaventem",
          gepland:"15:15",aankomst:"17:45",tz:"Europe/Madrid",
-         bord:"https://www.aena.es/en/palma-de-mallorca/flight-information/flight-information.html"}
+         tracker:"https://www.flightradar24.com/data/airports/pmi",
+         bord:"https://www.aena.es/en/flight-info.html"}
 };
 function welkeVlucht(){
   const vandaag=new Date().toISOString().slice(0,10);
@@ -1039,6 +1057,7 @@ async function renderVlucht(handmatig=false){
     <div class="advice-actions" style="margin-top:12px">
       <button class="act" id="vluchtVerversen">Nu verversen</button>
       <a class="act" href="${v.bord}" target="_blank" rel="noopener">Vertrekbord luchthaven</a>
+      <a class="act" href="${v.tracker}" target="_blank" rel="noopener">Vlucht volgen</a>
       <a class="act" href="https://www.vueling.com/nl" target="_blank" rel="noopener">Inchecken bij Vueling</a>
     </div>
     <p class="lead" id="vluchtBudget" style="margin:10px 0 0;font-size:12px"></p></div>`;
